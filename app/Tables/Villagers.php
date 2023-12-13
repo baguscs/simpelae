@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Tables;
+
+use App\Models\Villager;
+use Illuminate\Http\Request;
+use ProtoneMedia\Splade\AbstractTable;
+use ProtoneMedia\Splade\SpladeTable;
+
+class Villagers extends AbstractTable
+{
+    /**
+     * Create a new instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Determine if the user is authorized to perform bulk actions and exports.
+     *
+     * @return bool
+     */
+    public function authorize(Request $request)
+    {
+        return true;
+    }
+
+    /**
+     * The resource or query builder.
+     *
+     * @return mixed
+     */
+    public function for()
+    {
+        return Villager::query();
+    }
+
+    /**
+     * Configure the given SpladeTable.
+     *
+     * @param \ProtoneMedia\Splade\SpladeTable $table
+     * @return void
+     */
+    public function configure(SpladeTable $table)
+    {
+        $table
+            ->withGlobalSearch('Cari data warga...', ['name', 'nik'])
+            ->defaultSort('name')
+            ->column(key: 'name', searchable: true, sortable: true, canBeHidden: false, label: 'Nama')
+            ->column(key: 'nik', searchable: true, sortable: true, label: 'NIK')
+            ->column(key: 'region_rt', searchable: true, sortable: true, label: 'Wilayah RT')
+            ->column(key: 'status_account', searchable: true, sortable: true, label: 'Status Akun')
+            ->column(label: 'Aksi')
+            ->paginate(15);
+
+        // $table
+        //     ->withGlobalSearch(columns: ['id'])
+        //     ->column('id', sortable: true)
+
+        //     ->searchInput('name')
+        //     ->searchInput(
+        //         key: 'framework',
+        //         label: 'Find your framework',
+        //     );
+            // ->selectFilter()
+            // ->withGlobalSearch()
+
+            // ->bulkAction()
+            // ->export()
+    }
+}
