@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Operator;
+use App\Models\Villager;
+use App\Tables\Operators;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
@@ -12,7 +14,10 @@ class OperatorController extends Controller
      */
     public function index()
     {
-        //
+        return view('app.operator.index', [
+            'pageTitle' => 'Lihat Pengurus',
+            'operators' => Operators::class
+        ]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VillagerController;
+use App\Http\Controllers\OperatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,10 @@ Route::middleware('splade')->group(function () {
             Route::get('index', [VillagerController::class, 'index'])->name('villager.index');
             Route::post('create/store', [VillagerController::class, 'store'])->name('villager.store');
             Route::put('update/{id_villager}', [VillagerController::class, 'update'])->name('villager.update');
+        });
+
+        Route::prefix('operator')->group(function () {
+            Route::get('index', [OperatorController::class, 'index'])->name('operator.index');
         });
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

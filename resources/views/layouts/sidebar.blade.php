@@ -65,11 +65,11 @@
             </Link>
         </li>
 
-        <li class="menu-item ">
-            <a href="" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('operator.index') ? 'active' : '' }}">
+            <Link as="button" href="{{ route('operator.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
-                <div>Aparat</div>
-            </a>
+                <div>Pengurus</div>
+            </Link>
         </li>
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text fw-bold" style="font-size: 14px">Pelayanan</span></li>

@@ -27,4 +27,14 @@ class Operator extends Model
 
     protected $appends = ['hash'];
     protected $hidden = ['id'];
+
+    /**
+     * Get the user that owns the Operator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(Villager::class, 'villager_id');
+    }
 }
