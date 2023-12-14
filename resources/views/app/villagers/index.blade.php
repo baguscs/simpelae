@@ -38,7 +38,7 @@
 
                     <x-splade-modal name="edit-data{{ $villagers->hash }}" max-width="xl">
                         <p class="fs-3 fw-bold mb-4">Edit Data Warga</p>
-                        <x-splade-form :default="$villagers">
+                        <x-splade-form :default="$villagers" action="{{ route('villager.update', $villagers->hash) }}" method="PUT">
                             @csrf
                             <x-villagers.edit></x-villagers.edit>
                             <div class="mt-4">

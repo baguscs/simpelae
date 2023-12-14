@@ -46,6 +46,7 @@ Route::middleware('splade')->group(function () {
         Route::prefix('villager')->group(function () {
             Route::get('index', [VillagerController::class, 'index'])->name('villager.index');
             Route::post('create/store', [VillagerController::class, 'store'])->name('villager.store');
+            Route::put('update/{id_villager}', [VillagerController::class, 'update'])->name('villager.update');
         });
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

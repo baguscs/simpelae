@@ -11,6 +11,7 @@ use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Villager\StoreRequest;
+use App\Http\Requests\Villager\UpdateRequest;
 
 class VillagerController extends Controller
 {
@@ -49,7 +50,7 @@ class VillagerController extends Controller
             'password' => Hash::make("password")
         ]);
 
-        Toast::title('Berhasil menambah data warga')->autoDismiss(3);
+        Toast::title('Berhasil menambah data warga')->autoDismiss(5);
 
         return redirect()->route('villager.index');
     }
@@ -73,9 +74,14 @@ class VillagerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Villager $villager)
+    public function update(UpdateRequest $request, Villager $villager, $id_villager)
     {
-        //
+        $request->validated();
+        $villager->update($request->all());
+
+        Toast::title('Berhasil mengubah data warga')->autoDismiss(5);
+
+        return redirect()->route('villager.index');
     }
 
     /**
