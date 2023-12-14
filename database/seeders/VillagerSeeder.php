@@ -48,6 +48,7 @@ class VillagerSeeder extends Seeder
                 'job' => $faker->jobTitle,
                 'nationaly' => 'Indonesia',
                 'phone_number' => $faker->numberBetween(111111111111, 999999999999),
+                'status_account' => "0",
             ]);
         }
     }

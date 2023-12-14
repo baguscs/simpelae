@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('job');
             $table->string('nationaly');
             $table->string('phone_number');
-            $table->enum('status_account', ['1', '0'])->default('0');
-            $table->enum('is_admin', ['1', '0'])->default('0');
+            $table->enum('status_account', ['1', '0'])->default('1');
+            $table->enum('is_operator', ['1', '0'])->default('0');
             $table->timestamps();
         });
     }

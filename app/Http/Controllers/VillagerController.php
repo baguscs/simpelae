@@ -77,6 +77,8 @@ class VillagerController extends Controller
     public function update(UpdateRequest $request, Villager $villager, $id_villager)
     {
         $request->validated();
+
+        $villager = Villager::byHashOrFail($id_villager);
         $villager->update($request->all());
 
         Toast::title('Berhasil mengubah data warga')->autoDismiss(5);
