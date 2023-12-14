@@ -41,7 +41,7 @@ class VillagerController extends Controller
     {
         $request->validated();
 
-        $newVillager = Villager::create($request->all(), ['status_account' => '1']);
+        $newVillager = Villager::create($request->all());
 
         User::create([
             'villager_id' => $newVillager->id,
@@ -79,6 +79,20 @@ class VillagerController extends Controller
         $request->validated();
 
         $villager = Villager::byHashOrFail($id_villager);
+
+        if ($villager->status_account != $request->status_account) {
+            if ($request->status_account == 0) {
+                User::where('villager_id', $villager->id)->delete();
+            } else{
+                User::create([
+                    'villager_id' => $villager->id,
+                    'position' => Operator::POSITION_WARGA,
+                    'email' => $request->email,
+                    'password' => Hash::make("password")
+                ]);
+            }
+        }
+
         $villager->update($request->all());
 
         Toast::title('Berhasil mengubah data warga')->autoDismiss(5);

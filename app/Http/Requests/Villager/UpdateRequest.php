@@ -25,7 +25,13 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         $id = Villager::hashToId($this->route('id_villager'));
+        $data = Villager::byHashOrFail($this->route('id_villager'));
 
+        if ($this->status_account != $data->status_account && $this->status_account == 1) {
+            return [
+                'email' => ['email', 'max:255', 'email:rfc,dns', Rule::unique(User::class), 'required']
+            ];
+        }
         return [
             'name' => ['required'],
             'region_rt' => ['required'],
@@ -40,7 +46,6 @@ class UpdateRequest extends FormRequest
             'job' => ['required'],
             'phone_number' => ['required', 'min_digits:12', 'max_digits:12', 'numeric'],
             'status_account' => ['required'],
-            'email' => ['email', 'max:255', 'email:rfc,dns', Rule::unique(User::class)],
         ];
     }
 

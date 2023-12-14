@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-6">
-        <x-splade-input id="form-data" name="name" label="Nama Lengkap" required />
+        <x-splade-input id="form-data" name="name" type="text" label="Nama Lengkap" required />
     </div>
     <div class="col-6">
         <x-splade-select id="form-data" name="region_rt" label="Wilayah RT" required>
@@ -14,15 +14,15 @@
 </div>
 <div class="row mt-3">
     <div class="col-6">
-        <x-splade-input id="form-data" name="nik" label="NIK" required />
+        <x-splade-input id="form-data" name="nik" type="number" label="NIK" required />
     </div>
     <div class="col-6">
-        <x-splade-input id="form-data" name="number_kk" label="Nomor Kartu Keluarga" required/>
+        <x-splade-input id="form-data" name="number_kk" type="number" label="Nomor Kartu Keluarga" required/>
     </div>
 </div>
 <div class="row mt-3">
     <div class="col-6">
-        <x-splade-input id="form-data" name="place_of_birth" label="Tempat Lahir" required />
+        <x-splade-input id="form-data" name="place_of_birth" type="text" label="Tempat Lahir" required />
     </div>
     <div class="col-6">
         <x-splade-input id="form-data" name="date_of_birth" label="Tanggal Lahir" date  required/>
@@ -56,15 +56,31 @@
 </div>
 <div class="row mt-3">
     <div class="col-6">
-        <x-splade-input id="form-data" name="phone_number" label="Nomor HP" required />
+        <x-splade-input id="form-data" name="phone_number" type="number" label="Nomor HP" required />
     </div>
     <div class="col-6">
         <x-splade-input id="form-data" name="job" label="Pekerjaan" type="text" required />
     </div>
     <div class="col-12 mt-3">
-        <x-splade-select id="form-data" name="status_account" label="Status Akun" required>
+        <x-splade-select id="custom-select" name="status_account" label="Status Akun" required>
             <option value="1">Aktif</option>
             <option value="0">Non-aktif</option>
         </x-splade-select>
     </div>
+    <div class="col-12 mt-3" id="field-email" hidden>
+        <x-splade-input id="email" name="email" type="email" label="E-Mail" />
+    </div>
 </div>
+<x-splade-script>
+    const select = document.getElementById('custom-select');
+    var fieldEmail = document.getElementById('field-email');
+
+    select.addEventListener('change', function handleChange(event) {
+        if(event.target.value == 1){
+            fieldEmail.removeAttribute('hidden');
+        }
+        else{
+            fieldEmail.setAttribute('hidden', true);
+        }
+    });
+</x-splade-script>
