@@ -48,9 +48,9 @@ class Operators extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Cari pengurus...', ['villager_id.name', 'region_rt'])
+            ->withGlobalSearch('Cari pengurus...', ['villager.name', 'region_rt'])
             ->defaultSort('region_rt')
-            ->column(key: 'villager_id.name', searchable: true, sortable: true, canBeHidden: false, label: 'Nama Pengurus')
+            ->column(key: 'villager.name', searchable: true, sortable: true, canBeHidden: false, label: 'Nama Pengurus')
             ->column(key: 'region_rt', searchable: true, sortable: true, label: 'Wilayah RT')
             ->column(key: 'position', searchable: true, sortable: true, label: 'Jabatan')
             ->column(label: 'Aksi')

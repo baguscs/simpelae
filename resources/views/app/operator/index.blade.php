@@ -13,7 +13,7 @@
 
         <x-splade-modal name="create-data" max-width="xl">
             <p class="fs-3 fw-bold mb-4">Tambah Data Pengurus</p>
-            <x-splade-form action="{{ route('villager.store') }}" method="POST" :default="$villagers">
+            <x-splade-form action="{{ route('operator.store') }}" method="POST" :default="$villagers">
                 @csrf
                 <x-operators.create :villagers="$villagers"></x-operators.create>
 

@@ -26,12 +26,8 @@
             "resources/assets/css/demo.css",
             "resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css",
             "resources/assets/vendor/css/pages/page-auth.css",
-            "resources/assets/js/config.js",
             'resources/js/app.js',
-            "resources/assets/vendor/js/helpers.js",
-            "resources/assets/js/config.js"
         ])
-
 
         <!-- Helpers -->
         <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>

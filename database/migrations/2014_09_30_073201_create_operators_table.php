@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->enum('region_rt', [Villager::RT1, Villager::RT2, Villager::RT3, Villager::RT4, Villager::RT5])->nullable();
             $table->enum('position', [Operator::POSITION_KETUA_RW, Operator::POSITION_KETUA_RT, Operator::POSITION_WARGA])->nullable();
-            $table->string('signature');
+            $table->string('signature')->nullable();
             $table->foreignId('villager_id')->constrained();
             $table->timestamps();
         });

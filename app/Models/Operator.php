@@ -33,7 +33,7 @@ class Operator extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function villager()
     {
         return $this->belongsTo(Villager::class, 'villager_id');
     }

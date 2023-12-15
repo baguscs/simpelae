@@ -13,8 +13,6 @@ export default defineConfig({
                 "resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css",
                 "resources/assets/vendor/libs/apex-charts/apex-charts.css",
                 "resources/assets/vendor/css/pages/page-auth.css",
-                "resources/assets/vendor/js/helpers.js",
-                "resources/assets/js/config.js",
                 "resources/assets/vendor/libs/jquery/jquery.js",
                 "resources/assets/vendor/libs/popper/popper.js",
                 "resources/assets/vendor/js/bootstrap.js",
