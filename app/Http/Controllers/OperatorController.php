@@ -14,9 +14,12 @@ class OperatorController extends Controller
      */
     public function index()
     {
+        $villager = Villager::query()->where('is_operator', '0')->get();
+        // dd($villager);
         return view('app.operator.index', [
             'pageTitle' => 'Lihat Pengurus',
-            'operators' => Operators::class
+            'operators' => Operators::class,
+            'villagers' => $villager,
         ]);
     }
 

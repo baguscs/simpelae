@@ -13,9 +13,10 @@
 
         <x-splade-modal name="create-data" max-width="xl">
             <p class="fs-3 fw-bold mb-4">Tambah Data Pengurus</p>
-            <x-splade-form action="{{ route('villager.store') }}" method="POST">
+            <x-splade-form action="{{ route('villager.store') }}" method="POST" :default="$villagers">
                 @csrf
-                <x-villagers.create></x-villagers.create>
+                <x-operators.create :villagers="$villagers"></x-operators.create>
+
                 <div class="mt-4">
                     <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
                     <Link class="btn btn-danger w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
