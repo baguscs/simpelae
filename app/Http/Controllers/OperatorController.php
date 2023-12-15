@@ -107,8 +107,24 @@ class OperatorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Operator $operator)
+    public function destroy(Operator $operator, $id_operator)
     {
-        //
+        $operator = Operator::byHashOrFail($id_operator);
+
+        $user = User::where('villager_id', $operator->villager_id)->firstOrFail();
+        $user->update([
+            'position' => Operator::POSITION_WARGA,
+            'operator_id' => null,
+        ]);
+
+        $villager = Villager::find($operator->villager_id);
+        $villager->update([
+            'is_operator' => '0'
+        ]);
+
+        $operator->delete();
+        Toast::title('Berhasil menghapus data pengurus')->autoDismiss(5);
+
+        return redirect()->back();
     }
 }

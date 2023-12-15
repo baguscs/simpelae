@@ -42,9 +42,22 @@
                         </x-splade-form>
                     </x-splade-modal>
 
-                    <Link href="#" class="btn btn-danger" id="btn-detail" style="margin-left: 10px">
+                    <Link href="#refund-info{{ $operators->hash }}" class="btn btn-danger" id="btn-detail" style="margin-left: 10px">
                         <i class="bx bx-trash"></i> Hapus
                     </Link>
+
+                    <x-splade-modal name="refund-info{{ $operators->hash }}">
+                        <p class="fs-3 fw-bold mb-4">Hapus Data Pengurus</p>
+                        <x-splade-form :default="$operators" action="{{ route('operator.update', $operators->hash) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <p class="text-center fs-5">Apakah anda yakin ingin menghapus data {{ $operators->villager->name }} ?</p>
+                            <div class="mt-4">
+                                <x-splade-submit class="btn btn-danger  w-30 float-end" :label="__('Hapus')" />
+                                <Link class="btn btn-secondary w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
+                            </div>
+                        </x-splade-form>
+                    </x-splade-modal>
 
                 </x-splade-cell>
                 <x-slot:empty-state>
