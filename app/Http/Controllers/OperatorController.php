@@ -9,6 +9,7 @@ use App\Tables\Operators;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\Operator\StoreRequest;
+use App\Http\Requests\Operator\UpdateRequest;
 
 class OperatorController extends Controller
 {
@@ -55,7 +56,7 @@ class OperatorController extends Controller
 
         Toast::title('Berhasil menambah data pengurus')->autoDismiss(5);
 
-        return redirect()->route('operator.index');
+        return redirect()->back();
     }
 
     /**
@@ -77,9 +78,30 @@ class OperatorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Operator $operator)
+    public function update(UpdateRequest $request, Operator $operator, $id_operator)
     {
-        //
+        $request->validated();
+
+        $updateOperator = Operator::byHashOrFail($id_operator);
+        $updateOperator->update([
+            'region_rt' => $request->region_rt,
+            'position' => $request->position
+        ]);
+
+        $updateUser = User::where('villager_id', $updateOperator->villager_id)->firstOrFail();
+        $updateUser->update([
+            'position' => $request->position,
+            'operator_id' => $updateOperator->id,
+        ]);
+
+        $updateVillager = Villager::find($updateOperator->villager_id);
+        $updateVillager->update([
+            'is_operator' => '1'
+        ]);
+
+        Toast::title('Berhasil mengubah data pengurus')->autoDismiss(5);
+
+        return redirect()->back();
     }
 
     /**

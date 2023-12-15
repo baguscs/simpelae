@@ -27,21 +27,14 @@
     <div class="row">
         <div class="col-xl-12">
             <x-splade-table :for="$operators">
-                {{-- <x-splade-cell status_account as="$villagers">
-                    @if ($villagers->status_account == 1)
-                        Aktif
-                    @else
-                        Non-Aktif
-                    @endif
-                </x-splade-cell> --}}
                 <x-splade-cell aksi as="$operators">
                     <Link href="#edit-data{{ $operators->hash }}" class="btn btn-primary btn-edit"> <i class="bx bx-edit-alt"></i> Edit</Link>
 
                     <x-splade-modal name="edit-data{{ $operators->hash }}" max-width="xl">
-                        <p class="fs-3 fw-bold mb-4">Edit Data Warga</p>
-                        <x-splade-form :default="$operators" action="{{ route('villager.update', $operators->hash) }}" method="PUT">
+                        <p class="fs-3 fw-bold mb-4">Edit Data Pengurus</p>
+                        <x-splade-form :default="$operators" action="{{ route('operator.update', $operators->hash) }}" method="PUT">
                             @csrf
-                            <x-villagers.edit></x-villagers.edit>
+                            <x-operators.edit></x-operators.edit>
                             <div class="mt-4">
                                 <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
                                 <Link class="btn btn-danger w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
@@ -49,17 +42,9 @@
                         </x-splade-form>
                     </x-splade-modal>
 
-                    <Link href="#detail-data{{ $operators->hash }}" class="btn btn-info" id="btn-detail" style="margin-left: 10px">
-                        <i class="bx bx-info-circle"></i> Detail
+                    <Link href="#" class="btn btn-danger" id="btn-detail" style="margin-left: 10px">
+                        <i class="bx bx-trash"></i> Hapus
                     </Link>
-
-
-                    <x-splade-modal name="detail-data{{ $operators->hash }}">
-                        <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
-                        <x-splade-form :default="$operators">
-                            <x-villagers.detail></x-villagers.detail>
-                        </x-splade-form>
-                    </x-splade-modal>
 
                 </x-splade-cell>
                 <x-slot:empty-state>

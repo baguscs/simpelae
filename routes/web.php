@@ -53,6 +53,7 @@ Route::middleware('splade')->group(function () {
         Route::prefix('operator')->group(function () {
             Route::get('index', [OperatorController::class, 'index'])->name('operator.index');
             Route::post('create/store', [OperatorController::class, 'store'])->name('operator.store');
+            Route::put('update/{id_operator}', [OperatorController::class, 'update'])->name('operator.update');
         });
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
