@@ -16,9 +16,9 @@
 
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <li class="nav-item">
-                    <Link href="javascript:void(0);" class="btn btn-primary rounded-pill btn-icon mt-1" as="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                    <button class="btn btn-primary rounded-pill btn-icon mt-1" as="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
                         <i class='bx bxs-bell bx-tada'></i>
-                    </Link>
+                    </button>
                 </li>
 
                 <!-- User -->

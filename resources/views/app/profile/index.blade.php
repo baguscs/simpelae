@@ -170,7 +170,7 @@
                                     <div class="wrapper">
                                         <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border: 1px solid; border-radius: 10px"></canvas>
                                     </div>
-                                    <Link href="javascript:void(0);" as="button" class="btn btn-danger mt-3" id="clear">Hapus</Link>
+                                    <button as="button" class="btn btn-danger mt-3" id="clear">Hapus</button>
                                 </div>
 
                             </div>
@@ -205,24 +205,23 @@
                 }
             });
 
-            var canvas = document.getElementById('signature-pad');
 
-            var signaturePad = new SignaturePad(canvas, {
-            });
-
-            var saveButton = document.getElementById('save');
-            var clearButton = document.getElementById('clear');
-
-            clearButton.addEventListener('click', function () {
-                signaturePad.clear();
-            });
 
         });
     </script>
 
     <x-splade-script>
+        var canvas = document.getElementById('signature-pad');
 
+        var signaturePad = new SignaturePad(canvas, {
+        });
 
+        var saveButton = document.getElementById('save');
+        var clearButton = document.getElementById('clear');
+
+        clearButton.addEventListener('click', function () {
+            signaturePad.clear();
+        });
     </x-splade-script>
 
 </x-app-layout>

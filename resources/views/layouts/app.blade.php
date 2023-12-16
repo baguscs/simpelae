@@ -16,7 +16,7 @@
                         <i class='bx bxs-bell'></i>
                         Notifikasi
                     </p>
-                    <Link href="javascript:void(0);" as="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></Link>
+                    <button as="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mx-0 flex-grow-0">
                     <ul class="list-group">
