@@ -48,9 +48,8 @@
 
                     <x-splade-modal name="refund-info{{ $operators->hash }}">
                         <p class="fs-3 fw-bold mb-4">Hapus Data Pengurus</p>
-                        <x-splade-form :default="$operators" action="{{ route('operator.update', $operators->hash) }}" method="POST">
+                        <x-splade-form :default="$operators" action="{{ route('operator.destroy', $operators->hash) }}" method="DELETE">
                             @csrf
-                            @method('DELETE')
                             <p class="text-center fs-5">Apakah anda yakin ingin menghapus data {{ $operators->villager->name }} ?</p>
                             <div class="mt-4">
                                 <x-splade-submit class="btn btn-danger  w-30 float-end" :label="__('Hapus')" />
