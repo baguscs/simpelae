@@ -18,6 +18,7 @@
         height: 200px;
         background-color: white;
     }
+
     </style>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-style1">
@@ -130,8 +131,8 @@
                         </x-splade-form>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                        <x-splade-form class="mb-3" action="{{ route('profile.updateSignature') }}" method="POST">
-                            @csrf
+                        {{-- <x-splade-form class="mb-3" action="{{ route('profile.updateSignature') }}" method="POST"> --}}
+                            {{-- @csrf --}}
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <label for="" class="block mb-1 text-gray-700 font-sans">Tanda tangan saat ini</label>
@@ -147,18 +148,18 @@
                                     <label>Ubah Tanda Tangan:</label>
                                     <div class="wrapper">
                                         <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border: 1px solid; border-radius: 10px"></canvas>
-                                        <x-splade-textarea name="signature" id="result" hidden />
+                                        {{-- <x-splade-textarea name="signature" id="result" /> --}}
                                     </div>
                                     <button type="button" style="background-color: red" class="btn btn-danger mt-3" id="clear">Hapus</button>
-                                    <button type="button" style="background-color: green" class="btn btn-danger mt-3" id="save">Yakin</button>
+                                    {{-- <button type="button" style="background-color: green" class="btn btn-success mt-3" id="save">Yakin</button> --}}
                                 </div>
 
                             </div>
                             <div class="mt-4">
-                                <x-splade-submit class="btn btn-primary d-grid w-30 float-end" :label="__('Simpan')" />
-                                {{-- <button type="button" class="btn btn-primary d-grid w-30 float-end" style="background-color: #696cff" id="save">Simpan</button> --}}
+                                {{-- <x-splade-submit class="btn btn-primary d-grid w-30 float-end" :label="__('Simpan')" /> --}}
+                                <button type="button" class="btn btn-primary d-grid w-30 float-end" style="background-color: #696cff" id="save">Simpan</button>
                             </div>
-                        </x-splade-form>
+                        {{-- </x-splade-form> --}}
                     </div>
                 </div>
             </div>
@@ -169,7 +170,6 @@
         {{ $pageTitle }}
     @endpush
 
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"
                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
                crossorigin="anonymous">
@@ -178,7 +178,7 @@
       <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
       <script>
-         $(function(){
+        $(function(){
 
                $.ajaxSetup({
                   headers: {
@@ -194,14 +194,21 @@
                var saveButton = document.getElementById('save');
                var clearButton = document.getElementById('clear');
 
+               saveButton.addEventListener('click', function (event) {
 
-               saveButton.addEventListener('click', function () {
-                    var result = document.getElementById('result').value = signaturePad.toDataURL('image/png');
+               $.ajax({
+                  url: "{{ route('profile.updateSignature') }}",
+                  method: 'post',
+                  data: {
+                     signature: signaturePad.toDataURL('image/png'),
+                  },
+                  success: function(result){
+                        alert("Berhasil")
+                  }});
                });
 
                 clearButton.addEventListener('click', function () {
                   signaturePad.clear();
-                  var result = document.getElementById('result').value = '';
                 });
 
             });
@@ -212,38 +219,19 @@
 
         var signaturePad = new SignaturePad(canvas, {
         });
-        (function ($) {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
+        var saveButton = document.getElementById('save');
+        var clearButton = document.getElementById('clear');
 
 
-
-            var saveButton = document.getElementById('save');
-            var clearButton = document.getElementById('clear');
-
-            clearButton.addEventListener('click', function () {
-                signaturePad.clear();
-            });
-
-            saveButton.addEventListener('click', function (event) {
-
-            $.ajax({
-                url: "{{ url('/profile/update-signature') }}",
-                method: 'post',
-                data: {
-                    signature: signaturePad.toDataURL('image/png'),
-                },
-                success: function(result){
-                    console.log("berhasil")
-                }});
-            });
-
+        saveButton.addEventListener('click', function () {
+            var result = document.getElementById('result').value = signaturePad.toDataURL('image/png');
         });
 
+        clearButton.addEventListener('click', function () {
+            signaturePad.clear();
+            var result = document.getElementById('result').value = '';
+        });
 
     </x-splade-script> --}}
 

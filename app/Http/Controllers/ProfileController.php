@@ -45,11 +45,15 @@ class ProfileController extends Controller
     }
 
     public function updateSignature(Request $request){
-        dd($request);
+        // dd($request);
         $data_uri = $request->signature;
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
         Storage::disk('public')->put('signature/contoh.jpg', $decoded_image);
+
+        Toast::title('Email anda berhasil diperbaruhi')->autoDismiss(3);
+
+        return redirect()->back();
     }
 
 
