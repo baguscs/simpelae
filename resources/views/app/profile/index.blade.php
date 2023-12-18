@@ -33,44 +33,22 @@
             <div class="nav-align-top mb-4">
                 <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
                     <li class="nav-item">
-                    <button
-                        type="button"
-                        class="nav-link active"
-                        role="tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#navs-pills-justified-home"
-                        aria-controls="navs-pills-justified-home"
-                        aria-selected="true"
-                    >
-                        <i class="tf-icons bx bx-home"></i> Informasi Dasar
-                    </button>
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true">
+                            <i class="tf-icons bx bx-home"></i> Informasi Dasar
+                        </button>
                     </li>
                     <li class="nav-item">
-                    <button
-                        type="button"
-                        class="nav-link"
-                        role="tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#navs-pills-justified-profile"
-                        aria-controls="navs-pills-justified-profile"
-                        aria-selected="false"
-                    >
-                        <i class="tf-icons bx bx-key"></i> Ubah Password
-                    </button>
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile" aria-selected="false">
+                            <i class="tf-icons bx bx-key"></i> Ubah Password
+                        </button>
                     </li>
-                    <li class="nav-item">
-                    <button
-                        type="button"
-                        class="nav-link"
-                        role="tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#navs-pills-justified-messages"
-                        aria-controls="navs-pills-justified-messages"
-                        aria-selected="false"
-                    >
-                        <i class="tf-icons bx bx-edit-alt"></i> Ubah Tanda Tangan
-                    </button>
-                    </li>
+                    @if (Auth::user()->position != "Warga")
+                        <li class="nav-item">
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false">
+                                <i class="tf-icons bx bx-edit-alt"></i> Ubah Tanda Tangan
+                            </button>
+                        </li>
+                    @endif
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
@@ -152,7 +130,7 @@
                         </x-splade-form>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                        <x-splade-form class="mb-3" action="{{ route('profile.updateEmail', $user->hash) }}" method="PUT">
+                        <x-splade-form class="mb-3" action="{{ route('profile.updateSignature') }}" method="POST">
                             @csrf
                             <div class="row mt-3">
                                 <div class="col-md-6">
@@ -169,13 +147,16 @@
                                     <label>Ubah Tanda Tangan:</label>
                                     <div class="wrapper">
                                         <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border: 1px solid; border-radius: 10px"></canvas>
+                                        <x-splade-textarea name="signature" id="result" hidden />
                                     </div>
-                                    <button as="button" class="btn btn-danger mt-3" id="clear">Hapus</button>
+                                    <button type="button" style="background-color: red" class="btn btn-danger mt-3" id="clear">Hapus</button>
+                                    <button type="button" style="background-color: green" class="btn btn-danger mt-3" id="save">Yakin</button>
                                 </div>
 
                             </div>
                             <div class="mt-4">
                                 <x-splade-submit class="btn btn-primary d-grid w-30 float-end" :label="__('Simpan')" />
+                                {{-- <button type="button" class="btn btn-primary d-grid w-30 float-end" style="background-color: #696cff" id="save">Simpan</button> --}}
                             </div>
                         </x-splade-form>
                     </div>
@@ -188,16 +169,50 @@
         {{ $pageTitle }}
     @endpush
 
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+               crossorigin="anonymous">
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
-    <script>
-        $(function () {
+      <script>
+         $(function(){
+
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+
+               var canvas = document.getElementById('signature-pad');
+
+               var signaturePad = new SignaturePad(canvas, {
+               });
+
+               var saveButton = document.getElementById('save');
+               var clearButton = document.getElementById('clear');
+
+
+               saveButton.addEventListener('click', function () {
+                    var result = document.getElementById('result').value = signaturePad.toDataURL('image/png');
+               });
+
+                clearButton.addEventListener('click', function () {
+                  signaturePad.clear();
+                  var result = document.getElementById('result').value = '';
+                });
+
+            });
+      </script>
+
+    {{-- <x-splade-script>
+        var canvas = document.getElementById('signature-pad');
+
+        var signaturePad = new SignaturePad(canvas, {
+        });
+        (function ($) {
 
             $.ajaxSetup({
                 headers: {
@@ -207,22 +222,30 @@
 
 
 
+            var saveButton = document.getElementById('save');
+            var clearButton = document.getElementById('clear');
+
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+            });
+
+            saveButton.addEventListener('click', function (event) {
+
+            $.ajax({
+                url: "{{ url('/profile/update-signature') }}",
+                method: 'post',
+                data: {
+                    signature: signaturePad.toDataURL('image/png'),
+                },
+                success: function(result){
+                    console.log("berhasil")
+                }});
+            });
+
         });
-    </script>
 
-    <x-splade-script>
-        var canvas = document.getElementById('signature-pad');
 
-        var signaturePad = new SignaturePad(canvas, {
-        });
-
-        var saveButton = document.getElementById('save');
-        var clearButton = document.getElementById('clear');
-
-        clearButton.addEventListener('click', function () {
-            signaturePad.clear();
-        });
-    </x-splade-script>
+    </x-splade-script> --}}
 
 </x-app-layout>
 

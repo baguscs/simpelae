@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -42,6 +43,16 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index', $id_user);
     }
+
+    public function updateSignature(Request $request){
+        dd($request);
+        $data_uri = $request->signature;
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        Storage::disk('public')->put('signature/contoh.jpg', $decoded_image);
+    }
+
+
 
     /**
      * Display the user's profile form.

@@ -48,7 +48,7 @@ class Villagers extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Cari data warga...', ['name', 'nik'])
+            ->withGlobalSearch('Cari nama warga...', ['name'])
             ->defaultSort('name')
             ->column(key: 'name', searchable: true, sortable: true, canBeHidden: false, label: 'Nama')
             ->column(key: 'nik', searchable: true, sortable: true, label: 'NIK')
