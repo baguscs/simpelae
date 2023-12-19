@@ -37,4 +37,14 @@ class Operator extends Model
     {
         return $this->belongsTo(Villager::class, 'villager_id');
     }
+
+    /**
+     * Get the user associated with the Operator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

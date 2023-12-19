@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Operator;
 
 class ProfileController extends Controller
 {
@@ -33,6 +34,7 @@ class ProfileController extends Controller
     }
 
     public function updatePassword(PasswordRequest $request, $id_user){
+        // dd(Auth::user()->operator_id);
         $request->validated();
 
         $request->user()->update([
@@ -45,48 +47,18 @@ class ProfileController extends Controller
     }
 
     public function updateSignature(Request $request){
-        // dd($request);
         $data_uri = $request->signature;
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
-        Storage::disk('public')->put('signature/contoh.jpg', $decoded_image);
+        $fileName = uniqid().'.png';
 
-        Toast::title('Email anda berhasil diperbaruhi')->autoDismiss(3);
+        $operator = Operator::find(Auth::user()->operator_id);
+        $operator->signature = $fileName;
+        $operator->save();
 
-        return redirect()->back();
+        Storage::disk('public')->put('signature/'. $fileName, $decoded_image);
     }
 
-
-
-    /**
-     * Display the user's profile form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Request $request)
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    /**
-     * Update the user's profile information.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(ProfileUpdateRequest $request)
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
 
     /**
      * Delete the user's account.

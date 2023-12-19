@@ -137,11 +137,11 @@
                                 <div class="col-md-6">
                                     <label for="" class="block mb-1 text-gray-700 font-sans">Tanda tangan saat ini</label>
                                     <Link href="#preview-signature">
-                                        <img src="{{ asset('img/illustrations/file_not_found.png') }}" alt="" style="width: 50px">
+                                        <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt="" style="width: 300px">
                                     </Link>
 
                                     <x-splade-modal name="preview-signature">
-                                        <img src="{{ asset('img/illustrations/file_not_found.png') }}" alt="">
+                                        <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt="">
                                     </x-splade-modal>
                                 </div>
                                 <div class="col-md-6">
@@ -198,12 +198,12 @@
 
                $.ajax({
                   url: "{{ route('profile.updateSignature') }}",
-                  method: 'post',
+                  method: 'PUT',
                   data: {
                      signature: signaturePad.toDataURL('image/png'),
                   },
                   success: function(result){
-                        alert("Berhasil")
+                        alert("Berhasil merubah tanda tangan");
                   }});
                });
 

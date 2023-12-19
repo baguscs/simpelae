@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Villager::class, 'villager_id', 'id');
     }
+
+    /**
+     * Get the user that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class, 'operator_id');
+    }
 }

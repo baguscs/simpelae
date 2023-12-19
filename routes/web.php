@@ -42,7 +42,7 @@ Route::middleware('splade')->group(function () {
             Route::get('index/{id_user}', [ProfileController::class, 'index'])->name('profile.index');
             Route::put('Update-email/{id_user}', [ProfileController::class, 'updateEmail'])->name('profile.updateEmail');
             Route::put('Update-password/{id_user}', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
-            Route::post('update-signature', [ProfileController::class, 'updateSignature'])->name('profile.updateSignature');
+            Route::put('update-signature', [ProfileController::class, 'updateSignature'])->name('profile.updateSignature');
         });
 
         Route::prefix('villager')->group(function () {
