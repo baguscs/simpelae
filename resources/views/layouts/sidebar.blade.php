@@ -47,28 +47,11 @@
             </Link>
         </li>
 
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <li class="menu-item {{ request()->routeIs('verification.*') ? 'active' : '' }}">
+            <Link as="button" href="{{ route('verification.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-check"></i>
-                <div data-i18n="User interface">Validasi</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="ui-accordion.html" class="menu-link">
-                        <div data-i18n="Accordion">Kelahiran</div>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Badges">Kematian</div>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Badges">Keterangan Miskin</div>
-                    </a>
-                </li>
-            </ul>
+                <div>Verifikasi</div>
+            </Link>
         </li>
     </ul>
 </aside>

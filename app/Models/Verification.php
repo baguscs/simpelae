@@ -28,4 +28,15 @@ class Verification extends Model
 
     protected $appends = ['hash'];
     protected $hidden = ['id'];
+
+    /**
+     * Get the user that owns the Verification
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function villager()
+    {
+        return $this->belongsTo(Villager::class, 'villager_id');
+    }
+
 }

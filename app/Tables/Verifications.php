@@ -2,13 +2,14 @@
 
 namespace App\Tables;
 
+use App\Models\Verification;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
 use Auth;
 
-class Submissions extends AbstractTable
+class Verifications extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -27,7 +28,12 @@ class Submissions extends AbstractTable
      */
     public function authorize(Request $request)
     {
-        return true;
+        if (Auth::user()->position != "Warga") {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -37,7 +43,12 @@ class Submissions extends AbstractTable
      */
     public function for()
     {
-        return Submission::query()->where('villager_id', Auth::user()->villager_id);
+        if (Auth::user()->position == "Ketua RW") {
+            return Submission::query()->where('status', 'Perlu di verifikasi')->where('is_rw_approve');
+        } else {
+            return Submission::query()->where('status', 'Perlu di verifikasi')->where('is_rt_approve');
+        }
+
     }
 
     /**
@@ -49,10 +60,11 @@ class Submissions extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Cari nama Pengaju...', ['name'])
+            ->withGlobalSearch('Cari nama Pengaju...', ['villager.name'])
             ->defaultSort('type')
-            ->column(key: 'type', searchable: true, sortable: true, canBeHidden: false, label: 'Jenis Keperluan')
-            ->column(key: 'name', searchable: true, sortable: true, label: 'Pengaju')
+            ->column(key: 'villager.name', searchable: true, sortable: true, canBeHidden: false, label: 'Pengaju')
+            ->column(key: 'type', searchable: true, sortable: true, label: 'Jenis Keperluan')
+            ->column(key: 'name', searchable: true, sortable: true, label: 'Kepada')
             ->column(key: 'status', searchable: true, sortable: true, label: 'Status Pengajuan')
             ->column(label: 'Aksi')
             ->paginate(15);

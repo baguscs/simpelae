@@ -31,18 +31,6 @@
                         <i class="bx bx-edit-alt"></i> Revisi
                     </Link>
 
-                    {{-- <x-splade-modal name="edit-data{{ $villagers->hash }}" max-width="xl">
-                        <p class="fs-3 fw-bold mb-4">Edit Data Warga</p>
-                        <x-splade-form :default="$villagers" action="{{ route('villager.update', $villagers->hash) }}" method="PUT">
-                            @csrf
-                            <x-villagers.edit></x-villagers.edit>
-                            <div class="mt-4">
-                                <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
-                                <Link class="btn btn-danger w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
-                            </div>
-                        </x-splade-form>
-                    </x-splade-modal> --}}
-
                     <Link href="#detail-data{{ $submission->hash }}" class="btn btn-info" id="btn-detail" style="margin-left: 10px">
                         <i class="bx bx-info-circle"></i> Detail
                     </Link>

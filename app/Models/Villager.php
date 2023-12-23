@@ -78,4 +78,14 @@ class Villager extends Model
     {
         return $this->hasOne(Submission::class);
     }
+
+    /**
+     * Get all of the comments for the Villager
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function Verification()
+    {
+        return $this->hasMany(Verification::class);
+    }
 }

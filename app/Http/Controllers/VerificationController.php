@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Verification;
+use App\Tables\Verifications;
 use Illuminate\Http\Request;
 
 class VerificationController extends Controller
@@ -12,7 +13,10 @@ class VerificationController extends Controller
      */
     public function index()
     {
-        //
+        return view('app.verification.index', [
+            'verification' => Verifications::class,
+            'pageTitle' => 'Verifikasi Pengajuan'
+        ]);
     }
 
     /**
