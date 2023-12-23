@@ -59,7 +59,7 @@
 
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <li class="nav-item">
-                    <button class="btn btn-primary rounded-pill btn-icon mt-1" as="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                    <button class="btn btn-primary rounded-pill btn-icon mt-1 mr-2" as="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
                         <i class='bx bxs-bell bx-tada'></i>
                     </button>
                 </li>

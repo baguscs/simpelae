@@ -40,11 +40,11 @@
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text fw-bold" style="font-size: 14px">Pelayanan</span></li>
 
-        <li class="menu-item ">
-            <a href="S" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('submission.*') ? 'active' : '' }}">
+            <Link as="button" href="{{ route('submission.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div>Pengajuan</div>
-            </a>
+            </Link>
         </li>
 
         <li class="menu-item">

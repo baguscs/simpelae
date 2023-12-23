@@ -16,15 +16,22 @@ return new class extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('villager_id')->constrained();
-            $table->enum('type', [Submission::TYPE_BORN, Submission::TYPE_DIE, Submission::TYPE_POOR])->nullable();
-            $table->string('name')->nullable();
-            $table->bigInteger('nik')->nullable()->unique();
-            $table->enum('gender', [Villager::GENDER_MAN, Villager::GENDER_WOMEN])->nullable();
-            $table->string('attachment');
+            $table->enum('type', [Submission::TYPE_BORN, Submission::TYPE_DIE, Submission::TYPE_POOR]);
+            $table->string('name');
+            $table->bigInteger('nik');
+            $table->enum('gender', [Villager::GENDER_MAN, Villager::GENDER_WOMEN]);
+            $table->enum('religion', [Villager::RELIGION_ISLAM, Villager::RELIGION_KRISTEN, Villager::RELIGION_KATOLIK, Villager::RELIGION_HINDHU, Villager::RELIGION_BUDHA, Villager::RELIGION_KONGHUCU]);
+            $table->string('address');
+            $table->string('job');
+            $table->string('nationaly');
+            $table->string('place_of_birth');
+            $table->string('date_of_birth');
+            $table->string('attachment')->nullable();
             $table->string('description');
-            $table->date('date');
+            $table->enum('marital_status', [Submission::MARITAL_STATUS_MARRIED, Submission::MARITAL_STATUS_SINGLE]);
             $table->enum('is_rw_approve', ['1', '0'])->nullable();
             $table->enum('is_rt_approve', ['1', '0'])->nullable();
+            $table->enum('status', [Submission::STATUS_APPROVE, Submission::STATUS_NEED_VERIF, Submission::STATUS_REJECT])->nullable();
             $table->string('letter_number')->nullable();
             $table->timestamps();
         });

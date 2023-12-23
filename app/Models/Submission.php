@@ -15,6 +15,13 @@ class Submission extends Model
     public const TYPE_DIE = "Akta Kematian";
     public const TYPE_POOR = "Keterangan Tidak Mampu";
 
+    public const STATUS_APPROVE = "Disetujui";
+    public const STATUS_NEED_VERIF = "Perlu di verifikasi";
+    public const STATUS_REJECT = "Ditolak";
+
+    public const MARITAL_STATUS_MARRIED = "Kawin";
+    public const MARITAL_STATUS_SINGLE = "Tidak Kawin";
+
     protected $table = "submissions";
 
     protected $primaryKey = "id";
@@ -25,12 +32,19 @@ class Submission extends Model
         'name',
         'nik',
         'gender',
+        'religion',
+        'address',
+        'job',
+        'nationaly',
+        'place_of_birth',
+        'date_of_birth',
         'attachment',
         'description',
-        'date',
+        'marital_status',
         'is_rw_approve',
         'is_rt_approve',
-        'letter_number'
+        'letter_number',
+        'status'
     ];
 
     protected $appends = ['hash'];

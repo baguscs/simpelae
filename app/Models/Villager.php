@@ -68,4 +68,14 @@ class Villager extends Model
     {
         return $this->hasOne(Operator::class);
     }
+
+    /**
+     * Get the user associated with the Villager
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function submission()
+    {
+        return $this->hasOne(Submission::class);
+    }
 }

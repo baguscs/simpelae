@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VillagerController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,8 @@ Route::middleware('splade')->group(function () {
             Route::put('update/{id_operator}', [OperatorController::class, 'update'])->name('operator.update');
             Route::delete('delete/{id_operator}', [OperatorController::class, 'destroy'])->name('operator.destroy');
         });
+
+        Route::resource('submission', SubmissionController::class);
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
