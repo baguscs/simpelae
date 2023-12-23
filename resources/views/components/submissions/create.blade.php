@@ -64,7 +64,7 @@
         </x-splade-select>
     </div>
     <div class="col-6">
-        <x-splade-input id="form-data" name="description" label="Keperluan" placeholder="Masukan Keperluan" type="text" required />
+        <x-splade-textarea name="description" label="Keperluan" placeholder="Masukkan Keperluan" required autosize />
     </div>
 </div>
 <div class="row mt-3">

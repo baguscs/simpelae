@@ -28,7 +28,7 @@
             <x-splade-table :for="$submission">
                 <x-splade-cell aksi as="$submission">
                     <Link href="#edit-data{{ $submission->hash }}" class="btn btn-primary btn-edit">
-                        <i class="bx bx-edit-alt"></i> Edit
+                        <i class="bx bx-edit-alt"></i> Revisi
                     </Link>
 
                     {{-- <x-splade-modal name="edit-data{{ $villagers->hash }}" max-width="xl">
@@ -48,12 +48,12 @@
                     </Link>
 
 
-                    {{-- <x-splade-modal name="detail-data{{ $villagers->hash }}">
+                    <x-splade-modal name="detail-data{{ $submission->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
-                        <x-splade-form :default="$villagers">
-                            <x-villagers.detail></x-villagers.detail>
+                        <x-splade-form :default="$submission">
+                            <x-submissions.detail :file="$submission->attachment"></x-submissions.detail>
                         </x-splade-form>
-                    </x-splade-modal> --}}
+                    </x-splade-modal>
 
                 </x-splade-cell>
                 <x-slot:empty-state>

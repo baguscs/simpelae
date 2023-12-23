@@ -42,8 +42,10 @@ class SubmissionController extends Controller
 
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
-            $fileName = uniqid().$file->getClientOriginalExtension();
-            Storage::disk('public')->put('submission/'. $fileName, $file);
+            $fileName = $file->hashName();
+            $pathFile = 'submission/'.$fileName;
+            Storage::disk('public')->put('submission/', $file);
+            $post->attachment = $fileName;
         }
 
         $post->name = $request->name;
