@@ -10,9 +10,20 @@ use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 use App\Http\Requests\Operator\StoreRequest;
 use App\Http\Requests\Operator\UpdateRequest;
+use Auth;
 
 class OperatorController extends Controller
 {
+    public function __construct(){
+        $this->middleware(function ($request, $next){
+            if (Auth::user()->position != "Ketua RW") {
+                abort(403, 'Anda tidak memiliki akses ke halaman ini');
+            }
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -19,24 +19,29 @@
                 <div data-i18n="Analytics">Beranda</div>
             </Link>
         </li>
+        @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text fw-bold" style="font-size: 14px">masyarakat</span>
+            </li>
+        @endif
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text fw-bold" style="font-size: 14px">masyarakat</span>
-        </li>
+        @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+            <li class="menu-item {{ request()->routeIs('villager.index') ? 'active' : '' }}">
+                <Link as="button" href="{{ route('villager.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div>Warga</div>
+                </Link>
+            </li>
+        @endif
 
-        <li class="menu-item {{ request()->routeIs('villager.index') ? 'active' : '' }}">
-            <Link as="button" href="{{ route('villager.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-group"></i>
-                <div>Warga</div>
-            </Link>
-        </li>
-
-        <li class="menu-item {{ request()->routeIs('operator.index') ? 'active' : '' }}">
-            <Link as="button" href="{{ route('operator.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
-                <div>Pengurus</div>
-            </Link>
-        </li>
+        @if (Auth::user()->position == "Ketua RW")
+            <li class="menu-item {{ request()->routeIs('operator.index') ? 'active' : '' }}">
+                <Link as="button" href="{{ route('operator.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
+                    <div>Pengurus</div>
+                </Link>
+            </li>
+        @endif
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text fw-bold" style="font-size: 14px">Pelayanan</span></li>
 
@@ -47,11 +52,13 @@
             </Link>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('verification.*') ? 'active' : '' }}">
-            <Link as="button" href="{{ route('verification.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-list-check"></i>
-                <div>Verifikasi</div>
-            </Link>
-        </li>
+        @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+            <li class="menu-item {{ request()->routeIs('verification.*') ? 'active' : '' }}">
+                <Link as="button" href="{{ route('verification.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-list-check"></i>
+                    <div>Verifikasi</div>
+                </Link>
+            </li>
+        @endif
     </ul>
 </aside>

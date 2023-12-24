@@ -6,6 +6,7 @@ use App\Models\Operator;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
+use Auth;
 
 class Operators extends AbstractTable
 {

@@ -3,7 +3,7 @@
         <x-splade-input id="form-data" name="name" label="Nama Lengkap" placeholder="Masukkan Nama Lengkap" type="text" required />
     </div>
     <div class="col-6">
-        <x-splade-select id="form-data" name="region_rt" label="Wilayah RT">
+        <x-splade-select id="form-data" name="region_rt" label="Wilayah RT" required>
             <option value="" selected disabled>Pilih Wilayah RT</option>
             <option value="RT 01">RT 01</option>
             <option value="RT 02">RT 02</option>

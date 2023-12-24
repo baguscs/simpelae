@@ -12,9 +12,20 @@ use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Villager\StoreRequest;
 use App\Http\Requests\Villager\UpdateRequest;
+use Auth;
 
 class VillagerController extends Controller
 {
+    public function __construct(){
+        $this->middleware(function ($request, $next){
+            if (Auth::user()->position == "Warga") {
+                abort(403, 'Anda tidak memiliki akses ke halaman ini');
+            }
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      */
