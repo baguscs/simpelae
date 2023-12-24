@@ -52,7 +52,7 @@ class Submissions extends AbstractTable
             ->withGlobalSearch('Cari nama Pengaju...', ['name'])
             ->defaultSort('type')
             ->column(key: 'type', searchable: true, sortable: true, canBeHidden: false, label: 'Jenis Keperluan')
-            ->column(key: 'name', searchable: true, sortable: true, label: 'Pengaju')
+            ->column(key: 'name', searchable: true, sortable: true, label: 'Kepada')
             ->column(key: 'status', searchable: true, sortable: true, label: 'Status Pengajuan')
             ->column(label: 'Aksi')
             ->paginate(15);

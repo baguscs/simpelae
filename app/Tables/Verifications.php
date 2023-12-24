@@ -46,7 +46,7 @@ class Verifications extends AbstractTable
         if (Auth::user()->position == "Ketua RW") {
             return Submission::query()->where('status', 'Perlu di verifikasi')->where('is_rw_approve', '0')->where('is_rt_approve', '1');
         } else {
-            return Submission::query()->where('status', 'Perlu di verifikasi')->where('is_rt_approve', '0')->where('is_rw_approve', '0');
+            return Submission::query()->where('status', 'Perlu di verifikasi')->where('is_rt_approve', '0')->where('is_rt_approve', '0')->where('region_rt', Auth::user()->villager->region_rt);
         }
 
     }

@@ -48,6 +48,7 @@ class SubmissionController extends Controller
             $post->attachment = $fileName;
         }
 
+        $post->region_rt = Auth::user()->villager->region_rt;
         $post->name = $request->name;
         $post->nik = $request->nik;
         $post->place_of_birth = $request->place_of_birth;

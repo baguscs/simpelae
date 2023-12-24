@@ -28,6 +28,7 @@ class Submission extends Model
 
     protected $fillable = [
         'villager_id',
+        'region_rt',
         'type',
         'name',
         'nik',
