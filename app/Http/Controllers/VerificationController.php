@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Verification;
+use App\Models\Submission;
 use App\Tables\Verifications;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,15 @@ class VerificationController extends Controller
     {
         return view('app.verification.index', [
             'verification' => Verifications::class,
-            'pageTitle' => 'Verifikasi Pengajuan'
+            'pageTitle' => 'Lihat Verifikasi Pengajuan'
+        ]);
+    }
+
+    public function comment($id_submission) {
+        $data = Submission::byHashOrFail($id_submission);
+        return view('app.verification.comment', [
+            'pageTitle' => 'Verifikasi Pengajuan '. $data->villager->name,
+            'submission' => $data
         ]);
     }
 
