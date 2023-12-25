@@ -62,7 +62,8 @@ Route::middleware('splade')->group(function () {
 
         Route::resource('submission', SubmissionController::class);
         Route::resource('verification', VerificationController::class);
-         Route::get('verification/comment/{id_submission}', [VerificationController::class, 'comment'])->name('verification.comment');
+        Route::get('verification/comment/{id_submission}', [VerificationController::class, 'comment'])->name('verification.comment');
+        Route::post('verification/comment/post/{id_submission}', [VerificationController::class, 'post'])->name('verification.post');
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

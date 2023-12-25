@@ -22,43 +22,43 @@
                         <x-splade-form :default="$submission" class="mb-5">
                             @csrf
                             <div class="row ps-4 pe-4 pt-2">
-                                <div class="col-12">
+                                <div class="col-md-12">
                                     <x-splade-input type="text" name="villager.name" :label="__('Pengaju')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="name" :label="__('Kepada')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="nik" :label="__('NIK')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="place_of_birth" :label="__('Tempat Lahir')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="date_of_birth" :label="__('Tanggal Lahir')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="gender" :label="__('Jenis Kelamin')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="religion" :label="__('Agama')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="address" :label="__('Alamat Lengkap')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="nationaly" :label="__('Kewarganegaraan')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="marital_status" :label="__('Status Pernikahan')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="type" :label="__('Jenis Surat')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <x-splade-input type="text" name="description" :label="__('Keperluan')" readonly />
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-md-6 mt-3">
                                     <label for="">Dokumen Pendukung</label>
                                     <Link href="#preview-attachment">
                                         @if ($submission->attachment == null)
@@ -91,19 +91,20 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <x-splade-form>
+                    <x-splade-form class="mb-4" action="{{ route('verification.post', $submission->hash) }}" method="POST">
                         @csrf
                         <div class="col-12">
-                            <x-splade-group name="tags" label="Apakah pengajuan {{ $submission->villager->name }} disetujui?" required>
-                                <x-splade-checkbox name="tags" :show-errors="false" value="ya" label="Ya" />
-                                <x-splade-checkbox name="tags" :show-errors="false" value="tidak" label="Tidak" />
-                            </x-splade-group>
+                            <x-splade-select id="action" name="status" label="Pilih Aksi Verifikasi" required>
+                                <option value="" selected disabled>Pilih Aksi</option>
+                                <option value="Disetujui">Disetujui</option>
+                                <option value="Perlu Diperbaiki">Perlu Diperbaiki</option>
+                            </x-splade-select>
                         </div>
                         <div class="col-12 mt-3">
-                            <x-splade-textarea name="biography" label="Komentar" placeholder="Masukkan Komentar" required autosize />
+                            <x-splade-textarea id="comment" name="description" label="Komentar" placeholder="Masukkan Komentar" required autosize />
                         </div>
                         <div class="col-12 mt-4">
-                            <x-splade-submit class="btn btn-primary" :label="__('Simpan')" />
+                            <x-splade-submit class="btn btn-primary mb-4" :label="__('Simpan')" />
                         </div>
                     </x-splade-form>
                 </div>

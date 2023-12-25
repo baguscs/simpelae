@@ -17,7 +17,7 @@ class Submission extends Model
 
     public const STATUS_APPROVE = "Disetujui";
     public const STATUS_NEED_VERIF = "Perlu di verifikasi";
-    public const STATUS_REJECT = "Ditolak";
+    public const STATUS_NEED_REVISION = "Perlu di revisi";
 
     public const MARITAL_STATUS_MARRIED = "Kawin";
     public const MARITAL_STATUS_SINGLE = "Tidak Kawin";

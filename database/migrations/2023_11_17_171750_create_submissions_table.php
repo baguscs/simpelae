@@ -32,7 +32,7 @@ return new class extends Migration
             $table->enum('marital_status', [Submission::MARITAL_STATUS_MARRIED, Submission::MARITAL_STATUS_SINGLE]);
             $table->enum('is_rw_approve', ['1', '0'])->default('0');
             $table->enum('is_rt_approve', ['1', '0'])->default('0');
-            $table->enum('status', [Submission::STATUS_APPROVE, Submission::STATUS_NEED_VERIF, Submission::STATUS_REJECT])->nullable();
+            $table->enum('status', [Submission::STATUS_APPROVE, Submission::STATUS_NEED_VERIF, Submission::STATUS_NEED_REVISION])->nullable();
             $table->string('letter_number')->nullable();
             $table->timestamps();
         });

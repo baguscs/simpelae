@@ -6,6 +6,9 @@ use App\Models\Verification;
 use App\Models\Submission;
 use App\Tables\Verifications;
 use Illuminate\Http\Request;
+use App\Http\Requests\Verification\PostRequest;
+use ProtoneMedia\Splade\Facades\Toast;
+use Auth;
 
 class VerificationController extends Controller
 {
@@ -23,9 +26,39 @@ class VerificationController extends Controller
     public function comment($id_submission) {
         $data = Submission::byHashOrFail($id_submission);
         return view('app.verification.comment', [
-            'pageTitle' => 'Verifikasi Pengajuan '. $data->villager->name,
+            'pageTitle' => 'Verifikasi Pengajuan',
             'submission' => $data
         ]);
+    }
+
+    public function post(PostRequest $request, $id_submission) {
+        $request->validated();
+        $submission = Submission::byHashOrFail($id_submission);
+
+        $newVerif = new Verification;
+        $newVerif->submission_id = $submission->id;
+        $newVerif->operator_id = Auth::user()->operator_id;
+        $newVerif->status = $request->status;
+        $newVerif->description = $request->description;
+        $newVerif->save();
+
+        if ($request->status == "Disetujui") {
+            if (Auth::user()->position == "Ketua RW") {
+                $submission->is_rw_approve = '1';
+                $submission->status = "Disetujui";
+                $submission->save();
+            } else {
+                $submission->is_rt_approve = '1';
+                $submission->save();
+            }
+        } else {
+            $submission->status = "Perlu di revisi";
+            $submission->save();
+        }
+
+        Toast::title('Berhasil memverifikasi pengajuan')->autoDismiss(5);
+
+        return redirect()->route('verification.index');
     }
 
     /**
@@ -39,9 +72,9 @@ class VerificationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_submission)
     {
-        //
+        dd($id_submission);
     }
 
     /**

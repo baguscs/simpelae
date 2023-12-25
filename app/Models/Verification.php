@@ -13,7 +13,6 @@ class Verification extends Model
 
     public const STATUS_APPROVE = "Disetujui";
     public const STATUS_REVISION = "Perlu diperbaiki";
-    public const STATUS_REJECT = "Ditolak";
 
     protected $table = "verifications";
 
