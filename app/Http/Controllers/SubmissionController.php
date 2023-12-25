@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Tables\Submissions;
 use App\Models\Submission;
+use App\Models\Verification;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Submission\StoreRequest;
+use App\Http\Requests\Submission\UpdateRequest;
 use Auth;
 
 class SubmissionController extends Controller
@@ -66,7 +68,7 @@ class SubmissionController extends Controller
 
         $post->save();
 
-        Toast::title('Berhasil data pengajuan')->autoDismiss(5);
+        Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
         return redirect()->back();
     }
 
@@ -83,15 +85,51 @@ class SubmissionController extends Controller
      */
     public function edit(Submission $submission)
     {
-        //
+        $veriication = Verification::query()->where('submission_id', $submission->id)->get();
+        return view('app.submission.edit', [
+            'pageTitle' => "Revisi Pengajuan",
+            'verification' => $veriication,
+            'submission' => $submission
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Submission $submission)
+    public function update(UpdateRequest $request, Submission $submission)
     {
-        //
+        $request->validated();
+         if ($request->hasFile('attachments')) {
+            // delete file
+            Storage::disk('public')->delete('submission/'.$submission->attachemnt);
+
+            $file = $request->file('attachments');
+            $fileName = $file->hashName();
+            $pathFile = 'submission/'.$fileName;
+            Storage::disk('public')->put('submission/', $file);
+            $submission->attachment = $fileName;
+        }
+
+        $submission->region_rt = Auth::user()->villager->region_rt;
+        $submission->name = $request->name;
+        $submission->nik = $request->nik;
+        $submission->place_of_birth = $request->place_of_birth;
+        $submission->date_of_birth = $request->date_of_birth;
+        $submission->gender = $request->gender;
+        $submission->religion = $request->religion;
+        $submission->address = $request->address;
+        $submission->nationaly = $request->nationaly;
+        $submission->job = $request->job;
+        $submission->type = $request->type;
+        $submission->description = $request->description;
+        $submission->marital_status = $request->marital_status;
+        $submission->villager_id = Auth::user()->villager_id;
+        $submission->status = Submission::STATUS_NEED_VERIF;
+
+        $submission->save();
+
+        Toast::title('Berhasil mengubah data pengajuan')->autoDismiss(5);
+        return redirect()->route('submission.index');
     }
 
     /**

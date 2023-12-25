@@ -56,7 +56,7 @@
                                     <x-splade-input type="text" name="type" :label="__('Jenis Surat')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="description" :label="__('Keperluan')" readonly />
+                                    <x-splade-textarea type="text" name="description" :label="__('Keperluan')" autosize readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Dokumen Pendukung</label>

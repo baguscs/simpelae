@@ -47,4 +47,14 @@ class Operator extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Get all of the comments for the Operator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function verification()
+    {
+        return $this->hasMany(Verification::class);
+    }
 }

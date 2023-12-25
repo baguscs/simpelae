@@ -27,9 +27,11 @@
         <div class="col-xl-12">
             <x-splade-table :for="$submission">
                 <x-splade-cell aksi as="$submission">
-                    <Link href="#edit-data{{ $submission->hash }}" class="btn btn-primary btn-edit">
-                        <i class="bx bx-edit-alt"></i> Revisi
-                    </Link>
+                    @if ($submission->status == "Perlu di revisi")
+                        <Link href="{{ route('submission.edit', $submission->hash) }}" class="btn btn-primary btn-edit">
+                            <i class="bx bx-edit-alt"></i> Revisi
+                        </Link>
+                    @endif
 
                     <Link href="#detail-data{{ $submission->hash }}" class="btn btn-info" id="btn-detail" style="margin-left: 10px">
                         <i class="bx bx-info-circle"></i> Detail

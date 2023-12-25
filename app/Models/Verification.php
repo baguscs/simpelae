@@ -38,4 +38,14 @@ class Verification extends Model
         return $this->belongsTo(Villager::class, 'villager_id');
     }
 
+    /**
+     * Get the operator that owns the Verification
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function operator()
+    {
+        return $this->belongsTo(operator::class, 'operator_id');
+    }
+
 }

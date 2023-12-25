@@ -57,7 +57,7 @@
 <div class="row mt-3">
     <div class="col-6">
         <x-splade-select id="form-data" name="type" label="Jenis Surat" required>
-            <option value="" selected disabled>Pilih Jenis Keperluan</option>
+            <option value="" selected disabled>Pilih Jenis Tujuan</option>
             <option value="Akta Kelahiran">Akta Kelahiran</option>
             <option value="Akta Kematian">Akta Kematian</option>
             <option value="Keterangan Tidak Mampu">Keterangan Tidak Mampu</option>
