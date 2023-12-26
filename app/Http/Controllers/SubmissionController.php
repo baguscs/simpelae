@@ -6,6 +6,7 @@ use App\Tables\Submissions;
 use App\Models\Submission;
 use App\Models\Verification;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Submission\StoreRequest;
@@ -130,6 +131,17 @@ class SubmissionController extends Controller
 
         Toast::title('Berhasil mengubah data pengajuan')->autoDismiss(5);
         return redirect()->route('submission.index');
+    }
+
+    public function download($id_submission){
+        $submission = Submission::byHashOrFail($id_submission);
+        $export = Pdf::loadView('app.submission.export', [
+            'submission' => $submission
+        ]);
+        return $export->download('Surat Keterangan Desa - '.$submission->name.'.pdf');
+        // return view('app.submission.export', [
+        //     'submission' => $submission
+        // ]);
     }
 
     /**

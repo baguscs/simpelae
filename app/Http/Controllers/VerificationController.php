@@ -32,6 +32,7 @@ class VerificationController extends Controller
     }
 
     public function post(PostRequest $request, $id_submission) {
+
         $request->validated();
         $submission = Submission::byHashOrFail($id_submission);
 
@@ -46,6 +47,8 @@ class VerificationController extends Controller
             if (Auth::user()->position == "Ketua RW") {
                 $submission->is_rw_approve = '1';
                 $submission->status = "Disetujui";
+                $uniqNumber = "SMPL-".$submission->id.date('-d/m/Y');
+                $submission->letter_number = $uniqNumber;
                 $submission->save();
             } else {
                 $submission->is_rt_approve = '1';

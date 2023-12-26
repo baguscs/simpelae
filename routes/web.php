@@ -61,6 +61,7 @@ Route::middleware('splade')->group(function () {
         });
 
         Route::resource('submission', SubmissionController::class);
+        Route::get('submission/download/{id_submission}', [SubmissionController::class, 'download'])->name('submission.download');
 
         Route::resource('verification', VerificationController::class);
         Route::get('verification/comment/{id_submission}', [VerificationController::class, 'comment'])->name('verification.comment');
