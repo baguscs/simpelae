@@ -40,9 +40,11 @@
 
                     <x-splade-modal name="detail-data{{ $submission->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
-                        <Link href="{{ route('submission.download', $submission->hash) }}" class="btn btn-success mb-4">
-                            <i class="bx bx-download"></i> Download Surat
-                        </Link>
+                        @if ($submission->status == "Disetujui")
+                            <Link href="{{ route('submission.download', $submission->hash) }}" class="btn btn-success mb-4">
+                                <i class="bx bx-download"></i> Download Surat
+                            </Link>
+                        @endif
                         <x-splade-form :default="$submission">
                             <x-submissions.detail :file="$submission->attachment"></x-submissions.detail>
                         </x-splade-form>

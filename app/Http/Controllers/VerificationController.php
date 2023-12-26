@@ -12,6 +12,15 @@ use Auth;
 
 class VerificationController extends Controller
 {
+    public function __construct(){
+        $this->middleware(function ($request, $next){
+            if (Auth::user()->position == "Warga") {
+                abort(403, 'Anda tidak memiliki akses ke halaman ini');
+            }
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      */
