@@ -44,7 +44,7 @@
                                     <h6 class="mb-0">Kelahiran</h6>
                                 </div>
                                 <div class="user-progress">
-                                    <small class="fw-semibold">1</small>
+                                    <small class="fw-semibold">{{ $born_submission }}</small>
                                 </div>
                             </div>
                         </li>
@@ -57,7 +57,7 @@
                                     <h6 class="mb-0">Kematian</h6>
                                 </div>
                                 <div class="user-progress">
-                                    <small class="fw-semibold">1</small>
+                                    <small class="fw-semibold">{{ $die_submission }}</small>
                                 </div>
                             </div>
                         </li>
@@ -70,7 +70,7 @@
                                     <h6 class="mb-0">Keterangan Miskin</h6>
                                 </div>
                                 <div class="user-progress">
-                                    <small class="fw-semibold">1</small>
+                                    <small class="fw-semibold">{{ $poor_submission }}</small>
                                 </div>
                             </div>
                         </li>
@@ -86,7 +86,7 @@
                                     <h6 class="mb-0">Total Warga</h6>
                                 </div>
                                 <div class="user-progress">
-                                    <small class="fw-semibold">1</small>
+                                    <small class="fw-semibold">{{ $villager }}</small>
                                 </div>
                             </div>
                         </li>
@@ -101,7 +101,7 @@
                                     <h6 class="mb-0">Warga Aktif</h6>
                                 </div>
                                 <div class="user-progress">
-                                    <small class="fw-semibold">1</small>
+                                    <small class="fw-semibold">{{ $active_villager }}</small>
                                 </div>
                             </div>
                         </li>
@@ -128,7 +128,11 @@
                 },
                 datasets: [{
                     label: 'Jumlah Pengajuan',
-                    data: [12, 19, 3],
+                    data: [
+                        {{ $born_submission }},
+                        {{ $die_submission }},
+                        {{ $poor_submission }}
+                    ],
                     backgroundColor: [
                         '#71DD37',
                         '#ffab00',

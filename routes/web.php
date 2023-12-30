@@ -39,9 +39,7 @@ Route::middleware('splade')->group(function () {
 
 
     Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('dashboard', ['pageTitle' => "Beranda"]);
-        })->middleware(['verified'])->name('dashboard');
+        Route::get('/dashboard', [ProfileController::class, 'dashboard'])->middleware(['verified'])->name('dashboard');
 
         Route::prefix('profile')->group(function () {
             Route::get('index/{id_user}', [ProfileController::class, 'index'])->name('profile.index');

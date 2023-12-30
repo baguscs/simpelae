@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Operator;
+use App\Models\Villager;
+use App\Models\Submission;
 
 class ProfileController extends Controller
 {
@@ -81,5 +83,22 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function dashboard(){
+        $villager = Villager::all()->count();
+        $active_villager = Villager::query()->where('status_account', '1')->count();
+        $born_submission = Submission::query()->where('type', Submission::TYPE_BORN)->count();
+        $die_submission = Submission::query()->where('type', Submission::TYPE_DIE)->count();
+        $poor_submission = Submission::query()->where('type', Submission::TYPE_POOR)->count();
+
+        return view('dashboard', [
+            'pageTitle' => "Beranda",
+            'villager' => $villager,
+            'active_villager' => $active_villager,
+            'born_submission' => $born_submission,
+            'die_submission' => $die_submission,
+            'poor_submission' => $poor_submission
+        ]);
     }
 }
