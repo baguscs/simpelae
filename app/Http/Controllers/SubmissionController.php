@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Requests\Submission\StoreRequest;
 use App\Http\Requests\Submission\UpdateRequest;
 use Auth;
@@ -31,7 +32,9 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.submission.create', [
+            'pageTitle' => 'Tambah Pengajuan'
+        ]);
     }
 
     /**
@@ -39,6 +42,7 @@ class SubmissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        // dd($request);
         $request->validated();
 
         $post = new Submission;
@@ -67,10 +71,16 @@ class SubmissionController extends Controller
         $post->villager_id = Auth::user()->villager_id;
         $post->status = Submission::STATUS_NEED_VERIF;
 
+        // $data_uri = $request->signature;
+        // $encoded_image = explode(",", $data_uri)[1];
+        // $decoded_image = base64_decode($encoded_image);
+        // $fileName = uniqid().'.png';
+        // Storage::disk('public')->put('signature/'. $fileName, $decoded_image);
+
         $post->save();
 
         Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
-        return redirect()->back();
+        return redirect()->route('submission.index');
     }
 
     /**
@@ -135,13 +145,25 @@ class SubmissionController extends Controller
 
     public function download($id_submission){
         $submission = Submission::byHashOrFail($id_submission);
-        $export = Pdf::loadView('app.submission.export', [
-            'submission' => $submission
-        ]);
-        return $export->download('Surat Keterangan Desa - '.$submission->name.'.pdf');
-        // return view('app.submission.export', [
-        //     'submission' => $submission
+        $qrcode = QrCode::size(100)->generate("hallo");
+        // $content = $qrcode->getContent();
+
+        // $encoded_image  = base64_encode($qrcode);
+        // $decoded_image = base64_decode($encoded_image);
+
+        // $fileName = uniqid().'.png';
+        // Storage::disk('public')->put('qrcode/'. $fileName, $decoded_image);
+        // dd($base64);
+        // dd($qrcode);
+        // $export = Pdf::loadView('app.submission.export', [
+        //     'submission' => $submission,
+        //     'qrcode' => $qrcode
         // ]);
+        // return $export->download('Surat Keterangan Desa - '.$submission->name.'.pdf');
+        return view('app.submission.export', [
+            'submission' => $submission,
+            'qrcode' => $qrcode
+        ]);
     }
 
     /**

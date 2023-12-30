@@ -9,9 +9,9 @@
     </nav>
     <div class="mb-4 d-flex">
         <p style="font-size: 25px">Data Pengajuan</p>
-        <Link href="#create-data" class="btn btn-success ml-3"><i class="bx bx-user-plus"></i> Tambah Pengajuan</Link>
+        <Link href="{{ route('submission.create') }}" class="btn btn-success ml-3"><i class="bx bx-user-plus"></i> Tambah Pengajuan</Link>
 
-        <x-splade-modal name="create-data" max-width="xl">
+        {{-- <x-splade-modal name="create-data" max-width="xl">
             <p class="fs-3 fw-bold mb-4">Tambah Data Pengajuan</p>
             <x-splade-form action="{{ route('submission.store') }}" method="POST">
                 @csrf
@@ -21,7 +21,7 @@
                     <Link class="btn btn-danger w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
                 </div>
             </x-splade-form>
-        </x-splade-modal>
+        </x-splade-modal> --}}
     </div>
     <div class="row">
         <div class="col-xl-12">
@@ -41,9 +41,9 @@
                     <x-splade-modal name="detail-data{{ $submission->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
                         @if ($submission->status == "Disetujui")
-                            <Link href="{{ route('submission.download', $submission->hash) }}" class="btn btn-success mb-4">
+                            <a href="{{ route('submission.download', $submission->hash) }}" target="_blank" class="btn btn-success mb-4">
                                 <i class="bx bx-download"></i> Download Surat
-                            </Link>
+                            </a>
                         @endif
                         <x-splade-form :default="$submission">
                             <x-submissions.detail :file="$submission->attachment"></x-submissions.detail>

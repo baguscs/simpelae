@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('date_of_birth');
             $table->string('attachment')->nullable();
             $table->string('description');
+            // $table->string('signature');
             $table->enum('marital_status', [Submission::MARITAL_STATUS_MARRIED, Submission::MARITAL_STATUS_SINGLE]);
             $table->enum('is_rw_approve', ['1', '0'])->default('0');
             $table->enum('is_rt_approve', ['1', '0'])->default('0');

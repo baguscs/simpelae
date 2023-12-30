@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Employee List</title>
-    <style>
+    {{-- <style>
         .text-content{
             font-size: 15px
         }
@@ -34,24 +34,16 @@
         }
 
         .column-1{
-            margin-left: 40px;
-            margin-right: 200px
+            margin-left: 450px;
+            /* margin-right: 200px */
         }
-    </style>
+    </style> --}}
 </head>
 <body>
-    <div class="row text-center mb-2 fw-bold">
-        <center>
-            <h3>Desa Sawo Bringin RW 02</h3>
-            <h3 style="margin-top: -15px">Kelurahan Bringin, Kecamatan Sambikerep</h3>
-            <h3 style="margin-top: -15px">Kota Surabaya, Provinsi Jawa Timur</h3>
-        </center>
-    </div>
-    <hr class="divider" />
     <div class="row text-center mt-3 mb-3">
         <center>
-            <h4>SURAT PENGANTAR DESA</h4>
-            <h4 style="margin-top: -10px">No. Surat : {{ $submission->letter_number }}</h4>
+            <h3 style="text-decoration: underline; font-weight: bold">SURAT PENGANTAR DESA</h3>
+            <h3 style="margin-top: 10px">No. Surat : {{ $submission->letter_number }}</h3>
         </center>
     </div>
     <p class="text-content" style="margin-left: 20px">Yang bertanda tangan di bawah ini, menerangkan :</p>
@@ -113,7 +105,7 @@
         </tr>
     </table>
     <p class="text-content" style="margin-left: 20px">Demikian surat ini dibuat agar mendapat bantuan seperlunya</p>
-    <div class="row">
+    {{-- <div class="row">
         <div class="column column-1">
             <div class="card">
                 <p>Tanda tangan</p>
@@ -123,14 +115,28 @@
             </div>
         </div>
 
-        <div class="column">
+        <div class="column" style="margin-left:450px">
             <div class="card">
                 <p>Surabaya, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
                 <p>Mengetahui:</p>
+                <img src="{!! $qrcode !!}" alt="">
+                {!! $qrcode !!}
                 <img src="{{ public_path('img/illustrations/file_not_found.png') }}" alt="" style="width: 150px">
                 <p>Pengurus Desa Sawo Bringin</p>
             </div>
         </div>
+    </div> --}}
+    <div style="float: right; margin-right: 50px">
+        <center>
+            <p style="margin-top: 20px">Surabaya, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+            <p style="margin-bottom: 20px">Mengetahui:</p>
+            {!! $qrcode !!}
+            <p style="margin-top: 20px">Pengurus Desa Sawo Bringin</p>
+        </center>
     </div>
+
+    <script>
+        window.print()
+    </script>
 </body>
 </html>
