@@ -35,6 +35,9 @@ Route::middleware('splade')->group(function () {
         return view('welcome');
     });
 
+    Route::get('submission/check-validation/{id_submission}', [SubmissionController::class, 'check'])->name('submission.check');
+
+
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('dashboard', ['pageTitle' => "Beranda"]);

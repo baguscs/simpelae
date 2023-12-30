@@ -145,7 +145,8 @@ class SubmissionController extends Controller
 
     public function download($id_submission){
         $submission = Submission::byHashOrFail($id_submission);
-        $qrcode = QrCode::size(100)->generate("hallo");
+        // dd(route(''))
+        $qrcode = QrCode::size(100)->generate(route('submission.check', $submission->hash));
         // $content = $qrcode->getContent();
 
         // $encoded_image  = base64_encode($qrcode);
@@ -163,6 +164,13 @@ class SubmissionController extends Controller
         return view('app.submission.export', [
             'submission' => $submission,
             'qrcode' => $qrcode
+        ]);
+    }
+
+    public function check($id_submission){
+        $submission = Submission::byHashOrFail($id_submission);
+        return view('app.submission.check', [
+            'submission' => $submission
         ]);
     }
 

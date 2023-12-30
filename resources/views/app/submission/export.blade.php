@@ -131,7 +131,7 @@
             <p style="margin-top: 20px">Surabaya, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
             <p style="margin-bottom: 20px">Mengetahui:</p>
             {!! $qrcode !!}
-            <p style="margin-top: 20px">Pengurus Desa Sawo Bringin</p>
+            <p style="margin-top: 20px">Pengurus Desa Sawo Bringin RW 02</p>
         </center>
     </div>
 
