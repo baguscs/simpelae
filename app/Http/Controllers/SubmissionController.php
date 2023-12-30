@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tables\Submissions;
 use App\Models\Submission;
 use App\Models\Verification;
+use App\Models\Operator;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -169,8 +170,13 @@ class SubmissionController extends Controller
 
     public function check($id_submission){
         $submission = Submission::byHashOrFail($id_submission);
+        $rt = Operator::where('region_rt', $submission->region_rt)->get();
+        $rw = Operator::where('position', "Ketua RW")->get();
+        // dd($nameRT);
         return view('app.submission.check', [
-            'submission' => $submission
+            'submission' => $submission,
+            'rt' => $rt,
+            'rw' => $rw
         ]);
     }
 

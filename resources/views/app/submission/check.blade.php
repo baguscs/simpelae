@@ -39,11 +39,19 @@
                     <div class="row" style="margin-top: 20px">
                         <div class="col-md-6">
                             <p style="font-weight: bold">Ketua RT</p>
-                            <p style="">Terdaftar</p>
+                            <p style="">
+                                @foreach ($rt as $item)
+                                    {{ $item->villager->name }}
+                                @endforeach
+                            </p>
                         </div>
                         <div class="col-md-6">
                             <p style="font-weight: bold">Ketua RW</p>
-                            <p style="">{{ $submission->type }}</p>
+                            <p style="">
+                                @foreach ($rw as $item)
+                                    {{ $item->villager->name }}
+                                @endforeach
+                            </p>
                         </div>
                     </div>
                     <p style="font-weight: bold; margin-top: 30px">Informasi Pengajuan</p>
