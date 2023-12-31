@@ -8,6 +8,15 @@
         <div class="layout-page">
             {{-- navbar --}}
             @include('layouts.navbar')
+            @php
+            if (Auth::user()->position == "Ketua RW") {
+                $needVerif = App\Models\Submission::query()->where('is_rw_approve', '0')->where('status', App\Models\Submission::STATUS_NEED_VERIF)->count();
+            } else if(Auth::user()->position == "Ketua RT") {
+                $needVerif = App\Models\Submission::query()->where('is_rt_approve', '0')->where('status', App\Models\Submission::STATUS_NEED_VERIF)->count();
+            }
+            $needRevision = App\Models\Submission::query()->where('villager_id', Auth::user()->villager_id)->where('status', App\Models\Submission::STATUS_NEED_REVISION)->count();
+
+            @endphp
 
             {{-- notification --}}
             <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasBoth" aria-labelledby="offcanvasBothLabel">
@@ -20,19 +29,37 @@
                 </div>
                 <div class="offcanvas-body mx-0 flex-grow-0">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between">
-                            <i class='bx bx-badge-check me-2'></i>
-                            Pengajuan Perlu di Validasi
-                            <span class="badge bg-primary">5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <i class='bx bx-analyse me-2'></i>
-                            Pengajuan Perlu di Review
-                            <span class="badge bg-warning">5</span>
-                        </li>
+                       @if ($needVerif != 0)
+                            <li class="list-group-item d-flex justify-content-between">
+                                <i class='bx bx-badge-check me-2'></i>
+                                Pengajuan Perlu di Validasi
+                                <span class="badge bg-primary">
+                                    @if (Auth::user()->position != 'Warga')
+                                        {{ $needVerif }}
+                                    @endif
+                                </span>
+                            </li>
+                       @endif
+                       @if ($needRevision != 0)
+                            <li class="list-group-item d-flex justify-content-between">
+                                <i class='bx bx-analyse me-2'></i>
+                                Pengajuan Perlu di Revisi
+                                <span class="badge bg-warning">
+                                    {{ $needRevision }}
+                                </span>
+                            </li>
+                       @endif
                     </ul>
                 </div>
-                <h4 class="text-center">Tidak ada Notifikasi saat ini</h4>
+                @if (Auth::user()->position == "Warga")
+                    @if ($needRevision == 0)
+                        <h4 class="text-center">Tidak ada Notifikasi saat ini</h4>
+                    @endif
+                @else
+                    @if ($needVerif == 0 && $needRevision == 0)
+                        <h4 class="text-center">Tidak ada Notifikasi saat ini</h4>
+                    @endif
+                @endif
             </div>
             {{-- end notification --}}
 
