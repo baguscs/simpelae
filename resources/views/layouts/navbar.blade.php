@@ -10,40 +10,56 @@
                     <Link href="{{ route('dashboard') }}" class="app-brand-link ml-5 mt-3">
                         <x-application-logo></x-application-logo>
                     </Link>
+
                     <li class="ml-5 mt-3 {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <Link as="button" href="{{ route('dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i> Beranda
                         </Link>
                     </li>
-                    <li class="menu-header small text-uppercase mt-3">
-                        <span class="menu-header-text fw-bold ml-5" style="font-size: 12px">masyarakat</span>
-                    </li>
-                    <li class="ml-5 mt-3 {{ request()->routeIs('villager.index') ? 'active' : '' }}">
-                        <Link as="button" href="{{ route('villager.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-group"></i> Warga
-                        </Link>
-                    </li>
-                    <li class="ml-5 mt-3 {{ request()->routeIs('operator.index') ? 'active' : '' }}">
-                        <Link as="button" href="{{ route('operator.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
-                            <div>Pengurus</div>
-                        </Link>
-                    </li>
+
+                    @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+                        <li class="menu-header small text-uppercase mt-3">
+                            <span class="menu-header-text fw-bold ml-5" style="font-size: 12px">masyarakat</span>
+                        </li>
+                    @endif
+
+                     @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+                        <li class="ml-5 mt-3 {{ request()->routeIs('villager.index') ? 'active' : '' }}">
+                            <Link as="button" href="{{ route('villager.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-group"></i> Warga
+                            </Link>
+                        </li>
+                    @endif
+
+                    @if (Auth::user()->position == "Ketua RW")
+                        <li class="ml-5 mt-3 {{ request()->routeIs('operator.index') ? 'active' : '' }}">
+                            <Link as="button" href="{{ route('operator.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
+                                <div>Pengurus</div>
+                            </Link>
+                        </li>
+                    @endif
+
+
                     <li class="menu-header small text-uppercase mt-3">
                         <span class="menu-header-text fw-bold ml-5" style="font-size: 12px">pelayanan</span>
                     </li>
-                    <li class="menu-item ml-5 mt-3">
-                        <a href="S" class="menu-link">
+
+                    <li class="menu-item ml-5 mt-3 {{ request()->routeIs('submission.*') ? 'active' : '' }}">
+                        <Link as="button" href="{{ route('submission.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-box"></i>
                             <div>Pengajuan</div>
-                        </a>
+                        </Link>
                     </li>
-                    <li class="menu-item ml-5 mt-3">
-                        <a href="S" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-list-check"></i>
-                            <div>Validasi Pengajuan</div>
-                        </a>
-                    </li>
+
+                    @if (Auth::user()->position == "Ketua RW" || Auth::user()->position == "Ketua RT")
+                        <li class="menu-item ml-5 mt-3 {{ request()->routeIs('verification.*') ? 'active' : '' }}">
+                            <Link as="button" href="{{ route('verification.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-list-check"></i>
+                                <div>Verifikasi</div>
+                            </Link>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
