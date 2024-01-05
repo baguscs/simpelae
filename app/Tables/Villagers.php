@@ -6,6 +6,7 @@ use App\Models\Villager;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
+use Auth;
 
 class Villagers extends AbstractTable
 {
@@ -36,7 +37,12 @@ class Villagers extends AbstractTable
      */
     public function for()
     {
-        return Villager::query();
+        if (Auth::user()->position == "Ketua RW") {
+            return Villager::query();
+        } else {
+            return Villager::query()->where('region_rt', Auth::user()->operator->region_rt);
+        }
+
     }
 
     /**
