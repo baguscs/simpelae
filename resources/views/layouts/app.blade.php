@@ -9,11 +9,13 @@
             {{-- navbar --}}
             @include('layouts.navbar')
             @php
+            $needVerif = 0;
             if (Auth::user()->position == "Ketua RW") {
-                $needVerif = App\Models\Submission::query()->where('is_rw_approve', '0')->where('status', App\Models\Submission::STATUS_NEED_VERIF)->count();
-            } else if(Auth::user()->position == "Ketua RT") {
+                $needVerif = App\Models\Submission::query()->where('is_rt_approve', '1')->where('is_rw_approve', '0')->where('status', App\Models\Submission::STATUS_NEED_VERIF)->count();
+            } elseif(Auth::user()->position == "Ketua RT") {
                 $needVerif = App\Models\Submission::query()->where('is_rt_approve', '0')->where('status', App\Models\Submission::STATUS_NEED_VERIF)->count();
             }
+
             $needRevision = App\Models\Submission::query()->where('villager_id', Auth::user()->villager_id)->where('status', App\Models\Submission::STATUS_NEED_REVISION)->count();
 
             @endphp

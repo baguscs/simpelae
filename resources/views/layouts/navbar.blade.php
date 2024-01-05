@@ -97,12 +97,6 @@
                             </Link>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="">
-                                <i class="bx bx-cog me-2"></i>
-                                <span class="align-middle">Ganti Password</span>
-                            </a>
-                        </li>
-                        <li>
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
