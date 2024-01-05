@@ -32,7 +32,7 @@ Route::middleware('splade')->group(function () {
     Route::spladeUploads();
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('auth.login');
     });
 
     Route::get('submission/check-validation/{id_submission}', [SubmissionController::class, 'check'])->name('submission.check');

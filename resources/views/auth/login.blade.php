@@ -17,7 +17,7 @@
                     <x-splade-form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                         @csrf
                         <x-splade-input id="email" type="email" name="email" :label="__('Email')" required autofocus />
-                        <x-splade-input class="mt-3" id="password" type="password" name="password" :label="__('Password')" required autocomplete="current-password" />
+                        <x-splade-input class="mt-3" id="password" autocomplete="off" type="password" name="password" :label="__('Password')" required autocomplete="current-password" />
                         <div class="mt-4">
                             <x-splade-submit class="btn btn-primary d-grid w-100" :label="__('Masuk')" />
                         </div>
