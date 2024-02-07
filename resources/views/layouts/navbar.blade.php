@@ -1,7 +1,7 @@
 {{-- <x-splade-toogle> --}}
     <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
         <div class=" me-3 me-xl-0 d-xl-none">
-
+            {{-- responsive menu --}}
             <div class="btn-group" id="dropdown-icon-demo">
                 <button class="btn btn-primary dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bx bx-menu"></i>
@@ -57,6 +57,13 @@
                             <Link as="button" href="{{ route('verification.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-list-check"></i>
                                 <div>Verifikasi</div>
+                            </Link>
+                        </li>
+
+                        <li class="menu-item ml-5 mt-3 {{ request()->routeIs('archive.*') ? 'active' : '' }}">
+                            <Link as="button" href="{{ route('archive.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-archive-in"></i>
+                                <div>Arsip Pengajuan</div>
                             </Link>
                         </li>
                     @endif
