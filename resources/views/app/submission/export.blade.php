@@ -56,7 +56,7 @@
         <tr>
             <td>Alamat</td>
             <td class="ps-3">:</td>
-            <td class="ps-2">{{ $submission->address }}, RT : {{ $submission->region_rt }}, RW : 02</td>
+            <td class="ps-2">{{ $submission->address }}, {{ $submission->region_rt }}, RW : 02</td>
         </tr>
         <tr>
             <td>Pekerjaan</td>

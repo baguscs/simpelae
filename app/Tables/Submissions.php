@@ -49,10 +49,10 @@ class Submissions extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Cari nama Pengaju...', ['name'])
+            ->withGlobalSearch('Cari nama ditujukan kepada...', ['name'])
             ->defaultSort('type')
             ->column(key: 'type', searchable: true, sortable: true, canBeHidden: false, label: 'Jenis Keperluan')
-            ->column(key: 'name', searchable: true, sortable: true, label: 'Kepada')
+            ->column(key: 'name', searchable: true, sortable: true, label: 'Ditujukan Kepada')
             ->column(key: 'status', searchable: true, sortable: true, label: 'Status Pengajuan')
             ->column(label: 'Aksi')
             ->paginate(15);

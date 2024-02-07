@@ -60,7 +60,7 @@ class Verifications extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch('Cari nama Pengaju...', ['villager.name'])
+            ->withGlobalSearch('Cari nama pengaju...', ['villager.name'])
             ->defaultSort('type')
             ->column(key: 'villager.name', searchable: true, sortable: true, canBeHidden: false, label: 'Pengaju')
             ->column(key: 'type', searchable: true, sortable: true, label: 'Jenis Keperluan')

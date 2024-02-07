@@ -14,6 +14,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Requests\Submission\StoreRequest;
 use App\Http\Requests\Submission\UpdateRequest;
 use Auth;
+use Carbon\Carbon;
 
 class SubmissionController extends Controller
 {
@@ -43,7 +44,6 @@ class SubmissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // dd($request);
         $request->validated();
 
         $post = new Submission;
