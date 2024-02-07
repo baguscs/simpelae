@@ -59,6 +59,13 @@
                     <div>Verifikasi</div>
                 </Link>
             </li>
+
+            <li class="menu-item {{ request()->routeIs('archive.*') ? 'active' : '' }}">
+                <Link as="button" href="{{ route('archive.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-archive-in"></i>
+                    <div>Arsip Pengajuan</div>
+                </Link>
+            </li>
         @endif
     </ul>
 </aside>

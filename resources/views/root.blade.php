@@ -30,8 +30,8 @@
         ])
 
         <!-- Helpers -->
-        <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
-        <script src="{{ asset('assets/js/config.js') }}"></script>
+        {{-- <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+        <script src="{{ asset('assets/js/config.js') }}"></script> --}}
 
         @seoDescription('Aplikasi yang membantu warga dalam membuat surat keterangan desa Sawo Bringin, Sambikerep, Surabaya')
         @seoKeywords('Simpelae, Splade, PWA')

@@ -5,6 +5,7 @@ use App\Http\Controllers\VillagerController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\ArchiveSubmissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,8 @@ Route::middleware('splade')->group(function () {
         Route::resource('verification', VerificationController::class);
         Route::get('verification/comment/{id_submission}', [VerificationController::class, 'comment'])->name('verification.comment');
         Route::post('verification/comment/post/{id_submission}', [VerificationController::class, 'post'])->name('verification.post');
+
+        Route::resource('archive', ArchiveSubmissionController::class);
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
