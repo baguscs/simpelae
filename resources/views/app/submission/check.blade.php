@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-6">
                             <p style=""> <i class="bx bx-time"></i>
-                                {{ \Carbon\Carbon::parse($submission->created_at)->translatedFormat('h:m:s') }}
+                                {{ \Carbon\Carbon::parse($submission->created_at)->translatedFormat('H:i:s') }}
                             </p>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-6">
                             <p style=""> <i class="bx bx-time"></i>
-                                {{ \Carbon\Carbon::parse($submission->updated_at)->translatedFormat('h:m:s') }}
+                                {{ \Carbon\Carbon::parse($submission->updated_at)->translatedFormat('H:i:s') }}
                             </p>
                         </div>
                     </div>
