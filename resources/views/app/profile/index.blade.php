@@ -1,5 +1,5 @@
 <x-app-layout>
-    <style>
+    {{-- <style>
         .wrapper {
         position: relative;
         width: 400px;
@@ -19,7 +19,7 @@
         background-color: white;
     }
 
-    </style>
+    </style> --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-style1">
             <li class="breadcrumb-item">
@@ -43,13 +43,13 @@
                             <i class="tf-icons bx bx-key"></i> Ubah Password
                         </button>
                     </li>
-                    @if (Auth::user()->position != "Warga")
+                    {{-- @if (Auth::user()->position != "Warga")
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false">
                                 <i class="tf-icons bx bx-edit-alt"></i> Ubah Tanda Tangan
                             </button>
                         </li>
-                    @endif
+                    @endif --}}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <label for="" class="block mb-1 text-gray-700 font-sans">Foto Kartu Keluarga</label>
                                     <Link href="#preview-attachment">
                                         <img src="{{ asset('img/illustrations/file_not_found.png') }}" alt="" style="width: 50px">
@@ -109,8 +109,8 @@
                                     <x-splade-modal name="preview-attachment">
                                         <img src="{{ asset('img/illustrations/file_not_found.png') }}" alt="">
                                     </x-splade-modal>
-                                </div>
-                                <div class="col-6">
+                                </div> --}}
+                                <div class="col-12">
                                     <x-splade-input id="email" type="email" name="email" :label="__('E-Mail')" :label="__('Email')" required />
                                 </div>
                             </div>
@@ -130,37 +130,37 @@
                             </div>
                         </x-splade-form>
                     </div>
-                    <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                        {{-- <x-splade-form class="mb-3" action="{{ route('profile.updateSignature') }}" method="POST"> --}}
-                            {{-- @csrf --}}
+                    {{-- <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+                        <x-splade-form class="mb-3" action="{{ route('profile.updateSignature') }}" method="POST">
+                            @csrf
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <label for="" class="block mb-1 text-gray-700 font-sans">Tanda tangan saat ini</label>
                                     <Link href="#preview-signature">
-                                        {{-- <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt="" style="width: 300px"> --}}
+                                        <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt="" style="width: 300px">
                                     </Link>
 
                                     <x-splade-modal name="preview-signature">
-                                        {{-- <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt=""> --}}
+                                        <img src="{{ asset('storage/signature/'. $user->operator->signature) }}" alt="">
                                     </x-splade-modal>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Ubah Tanda Tangan:</label>
                                     <div class="wrapper">
                                         <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border: 1px solid; border-radius: 10px"></canvas>
-                                        {{-- <x-splade-textarea name="signature" id="result" /> --}}
+                                        <x-splade-textarea name="signature" id="result" />
                                     </div>
                                     <button type="button" style="background-color: red" class="btn btn-danger mt-3" id="clear">Hapus</button>
-                                    {{-- <button type="button" style="background-color: green" class="btn btn-success mt-3" id="save">Yakin</button> --}}
+                                    <button type="button" style="background-color: green" class="btn btn-success mt-3" id="save">Yakin</button>
                                 </div>
 
                             </div>
                             <div class="mt-4">
-                                {{-- <x-splade-submit class="btn btn-primary d-grid w-30 float-end" :label="__('Simpan')" /> --}}
+                                <x-splade-submit class="btn btn-primary d-grid w-30 float-end" :label="__('Simpan')" />
                                 <button type="button" class="btn btn-primary d-grid w-30 float-end" style="background-color: #696cff" id="save">Simpan</button>
                             </div>
-                        {{-- </x-splade-form> --}}
-                    </div>
+                        </x-splade-form>
+                    </div> --}}
                 </div>
             </div>
         </div>
