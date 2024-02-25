@@ -21,11 +21,11 @@
 
                     <x-splade-modal name="detail-data{{ $archives->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
-                        @if ($archives->status == "Disetujui")
+                        {{-- @if ($archives->status == "Disetujui")
                             <a href="{{ route('submission.download', $archives->hash) }}" target="_blank" class="btn btn-success mb-4">
                                 <i class="bx bx-download"></i> Download Surat
                             </a>
-                        @endif
+                        @endif --}}
                         <x-splade-form :default="$archives">
                             <x-submissions.detail :file="$archives->attachment"></x-submissions.detail>
                         </x-splade-form>
