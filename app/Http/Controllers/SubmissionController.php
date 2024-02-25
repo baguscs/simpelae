@@ -11,8 +11,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Http\Requests\Submission\StoreRequest;
+use SimpleSoftwareIO\QrCode\Generator;
 use App\Http\Requests\Submission\UpdateRequest;
+use App\Http\Requests\Submission\StoreRequest;
 use Auth;
 use Carbon\Carbon;
 
@@ -147,7 +148,10 @@ class SubmissionController extends Controller
     public function download($id_submission){
         $submission = Submission::byHashOrFail($id_submission);
         // dd(route(''))
-        $qrcode = QrCode::size(100)->generate(route('submission.check', $submission->hash));
+        // $qrcode = new Generator;
+        // $qrcode->size(100)->generate(route('submission.check', $submission->hash));
+        // dd($qrcode);
+        $qrcode = QrCode::size(100)->format('png')->generate(route('submission.check', $submission->hash));
         // $content = $qrcode->getContent();
 
         // $encoded_image  = base64_encode($qrcode);

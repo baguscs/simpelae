@@ -130,7 +130,9 @@
         <center>
             <p style="margin-top: 20px">Surabaya, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
             <p style="margin-bottom: 20px">Mengetahui:</p>
-            {!! $qrcode !!}
+            {{-- {!! QrCode::generate('Make me into a QrCode!'); !!} --}}
+            {{-- {!! $qrcode !!} --}}
+            <img src="data:image/png;base64, {!!  base64_encode($qrcode) !!}"/>
             <p style="margin-top: 20px">Pengurus Desa Sawo Bringin RW 02</p>
         </center>
     </div>

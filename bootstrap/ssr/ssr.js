@@ -12,6 +12,11 @@ var require_ssr = __commonJS({
   "ssr.js"(exports, module) {
     var vue = { exports: {} };
     var vue_cjs_prod = {};
+    /**
+    * vue v3.4.19
+    * (c) 2018-present Yuxi (Evan) You and Vue contributors
+    * @license MIT
+    **/
     var hasRequiredVue_cjs_prod;
     function requireVue_cjs_prod() {
       if (hasRequiredVue_cjs_prod)
@@ -33,7 +38,15 @@ var require_ssr = __commonJS({
           return Object.freeze(n);
         }
         var runtimeDom__namespace = /* @__PURE__ */ _interopNamespaceDefault(runtimeDom);
-        const compileCache = /* @__PURE__ */ Object.create(null);
+        const compileCache = /* @__PURE__ */ new WeakMap();
+        function getCache(options) {
+          let c = compileCache.get(options != null ? options : shared.EMPTY_OBJ);
+          if (!c) {
+            c = /* @__PURE__ */ Object.create(null);
+            compileCache.set(options != null ? options : shared.EMPTY_OBJ, c);
+          }
+          return c;
+        }
         function compileToFunction(template, options) {
           if (!shared.isString(template)) {
             if (template.nodeType) {
@@ -43,7 +56,8 @@ var require_ssr = __commonJS({
             }
           }
           const key = template;
-          const cached = compileCache[key];
+          const cache = getCache(options);
+          const cached = cache[key];
           if (cached) {
             return cached;
           }
@@ -65,18 +79,23 @@ var require_ssr = __commonJS({
           const { code } = compilerDom.compile(template, opts);
           const render = new Function("Vue", code)(runtimeDom__namespace);
           render._rc = true;
-          return compileCache[key] = render;
+          return cache[key] = render;
         }
         runtimeDom.registerRuntimeCompiler(compileToFunction);
         exports2.compile = compileToFunction;
         Object.keys(runtimeDom).forEach(function(k) {
-          if (k !== "default" && !exports2.hasOwnProperty(k))
+          if (k !== "default" && !Object.prototype.hasOwnProperty.call(exports2, k))
             exports2[k] = runtimeDom[k];
         });
       })(vue_cjs_prod);
       return vue_cjs_prod;
     }
     var vue_cjs = {};
+    /**
+    * vue v3.4.19
+    * (c) 2018-present Yuxi (Evan) You and Vue contributors
+    * @license MIT
+    **/
     var hasRequiredVue_cjs;
     function requireVue_cjs() {
       if (hasRequiredVue_cjs)
@@ -98,7 +117,15 @@ var require_ssr = __commonJS({
           return Object.freeze(n);
         }
         var runtimeDom__namespace = /* @__PURE__ */ _interopNamespaceDefault(runtimeDom);
-        const compileCache = /* @__PURE__ */ Object.create(null);
+        const compileCache = /* @__PURE__ */ new WeakMap();
+        function getCache(options) {
+          let c = compileCache.get(options != null ? options : shared.EMPTY_OBJ);
+          if (!c) {
+            c = /* @__PURE__ */ Object.create(null);
+            compileCache.set(options != null ? options : shared.EMPTY_OBJ, c);
+          }
+          return c;
+        }
         function compileToFunction(template, options) {
           if (!shared.isString(template)) {
             if (template.nodeType) {
@@ -109,7 +136,8 @@ var require_ssr = __commonJS({
             }
           }
           const key = template;
-          const cached = compileCache[key];
+          const cache = getCache(options);
+          const cached = cache[key];
           if (cached) {
             return cached;
           }
@@ -144,12 +172,12 @@ ${codeFrame}` : message);
           }
           const render = new Function("Vue", code)(runtimeDom__namespace);
           render._rc = true;
-          return compileCache[key] = render;
+          return cache[key] = render;
         }
         runtimeDom.registerRuntimeCompiler(compileToFunction);
         exports2.compile = compileToFunction;
         Object.keys(runtimeDom).forEach(function(k) {
-          if (k !== "default" && !exports2.hasOwnProperty(k))
+          if (k !== "default" && !Object.prototype.hasOwnProperty.call(exports2, k))
             exports2[k] = runtimeDom[k];
         });
       })(vue_cjs);
