@@ -10,22 +10,24 @@
     <div class="mb-4 d-flex">
         <p style="font-size: 25px">Data Pengajuan</p>
         <Link href="{{ route('submission.create') }}" class="btn btn-success ml-3"><i class="bx bx-user-plus"></i> Tambah Pengajuan</Link>
-
-        {{-- <x-splade-modal name="create-data" max-width="xl">
-            <p class="fs-3 fw-bold mb-4">Tambah Data Pengajuan</p>
-            <x-splade-form action="{{ route('submission.store') }}" method="POST">
-                @csrf
-                <x-submissions.create></x-submissions.create>
-                <div class="mt-4">
-                    <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
-                    <Link class="btn btn-danger w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
-                </div>
-            </x-splade-form>
-        </x-splade-modal> --}}
     </div>
     <div class="row">
         <div class="col-xl-12">
             <x-splade-table :for="$submission">
+                <x-splade-cell approve_rw as="$submission">
+                    @if ($submission->is_rw_approve == 1)
+                        <span class="badge badge-center bg-success"><i class="bx bx-check"></i></span>
+                    @else
+                        <span class="badge badge-center bg-danger"><i class="bx bx-x"></i></span>
+                    @endif
+                </x-splade-cell>
+                <x-splade-cell approve_rt as="$submission">
+                    @if ($submission->is_rt_approve == 1)
+                        <span class="badge badge-center bg-success"><i class="bx bx-check"></i></span>
+                    @else
+                        <span class="badge badge-center bg-danger"><i class="bx bx-x"></i></span>
+                    @endif
+                </x-splade-cell>
                 <x-splade-cell status as="$submission">
                     @if ($submission->status == "Perlu di revisi")
                         <span class="badge bg-warning"><i class="bx bx-time"></i> Perlu di revisi</span>

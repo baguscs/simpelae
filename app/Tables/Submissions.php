@@ -50,10 +50,11 @@ class Submissions extends AbstractTable
     {
         $table
             ->withGlobalSearch('Cari nama ditujukan kepada...', ['name'])
-            ->defaultSort('type')
+            ->defaultSort('create_at', 'desc')
             ->column(key: 'type', searchable: true, sortable: true, canBeHidden: false, label: 'Jenis Keperluan')
             ->column(key: 'name', searchable: true, sortable: true, label: 'Ditujukan Kepada')
-            // ->column(key: 'status', searchable: true, sortable: true, label: 'Status Pengajuan')
+            ->column('approve_rw', label: 'Persetujuan RW')
+            ->column('approve_rt', label: 'Persetujuan RT')
             ->column('status', label: 'Status Pengajuan')
             ->column(label: 'Aksi')
             ->paginate(15);
