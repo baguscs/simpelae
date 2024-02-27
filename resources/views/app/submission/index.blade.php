@@ -26,6 +26,15 @@
     <div class="row">
         <div class="col-xl-12">
             <x-splade-table :for="$submission">
+                <x-splade-cell status as="$submission">
+                    @if ($submission->status == "Perlu di revisi")
+                        <span class="badge bg-warning"><i class="bx bx-time"></i> Perlu di revisi</span>
+                    @elseif($submission->status == "Disetujui")
+                        <span class="badge bg-success"><i class="bx bx-check"></i> Disetujui</span>
+                    @else
+                        <span class="badge bg-danger"><i class="bx bx-x"></i> Ditolak</span>
+                    @endif
+                </x-splade-cell>
                 <x-splade-cell aksi as="$submission">
                     @if ($submission->status == "Perlu di revisi")
                         <Link href="{{ route('submission.edit', $submission->hash) }}" class="btn btn-primary btn-edit">
