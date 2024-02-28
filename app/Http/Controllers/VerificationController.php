@@ -89,13 +89,17 @@ class VerificationController extends Controller
                 $submission->is_rt_approve = '1';
                 $submission->save();
             }
-        } else {
+        } else if($request->status == "Perlu di revisi"){
             $submission->status = "Perlu di revisi";
             $submission->save();
             Mail::to($email)->send(new NotificationSubmission($content));
             // Mail::send('app.notification.email', $data, function($mail) use($email){
             //     $mail->to($email, 'no-reply')->subject('Notifikasi Pengajuan');
             // });
+        } else {
+            $submission->status = "Ditolak";
+            $submission->save();
+            Mail::to($email)->send(new NotificationSubmission($content));
         }
 
         Toast::title('Berhasil memverifikasi pengajuan')->autoDismiss(5);

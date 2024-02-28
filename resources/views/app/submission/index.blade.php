@@ -33,8 +33,10 @@
                         <span class="badge bg-warning"><i class="bx bx-time"></i> Perlu di revisi</span>
                     @elseif($submission->status == "Disetujui")
                         <span class="badge bg-success"><i class="bx bx-check"></i> Disetujui</span>
-                    @else
+                    @elseif($submission->status == "Ditolak")
                         <span class="badge bg-danger"><i class="bx bx-x"></i> Ditolak</span>
+                    @else
+                        <span class="badge bg-info"><i class="bx bx-mail-send"></i> Perlu di verifikasi</span>
                     @endif
                 </x-splade-cell>
                 <x-splade-cell aksi as="$submission">

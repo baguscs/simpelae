@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('submission_id')->constrained();
             $table->foreignId('operator_id')->constrained();
-            $table->enum('status', [Verification::STATUS_APPROVE, Verification::STATUS_REVISION])->nullable();
+            $table->enum('status', [Verification::STATUS_APPROVE, Verification::STATUS_REVISION, Verification::STATUS_REJECT])->nullable();
             $table->string('description');
             $table->timestamps();
         });

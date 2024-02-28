@@ -18,6 +18,7 @@ class Submission extends Model
     public const TYPE_POOR = "Keterangan Tidak Mampu";
 
     public const STATUS_APPROVE = "Disetujui";
+    public const STATUS_REJECT = "Ditolak";
     public const STATUS_NEED_VERIF = "Perlu di verifikasi";
     public const STATUS_NEED_REVISION = "Perlu di revisi";
 
