@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Verification;
 use App\Models\Submission;
 use App\Models\User;
+use App\Models\Operator;
 use App\Mail\NotificationSubmission;
+use App\Mail\NotificationVerification;
 use App\Tables\Verifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -48,7 +50,6 @@ class VerificationController extends Controller
         $request->validated();
         $submission = Submission::byHashOrFail($id_submission);
         $user = User::query()->where('villager_id', $submission->villager_id)->first();
-        // dd($user->email);
 
         $newVerif = new Verification;
         $newVerif->submission_id = $submission->id;
@@ -58,13 +59,7 @@ class VerificationController extends Controller
         $newVerif->save();
 
         $email = $user->email;
-        // $data = array(
-        //     'name' => $submission->villager->name,
-        //     'for' => $submission->name,
-        //     'type' => $submission->type,
-        //     'created_at' => $submission->created_at,
-        //     'status' => $request->status
-        // );
+
         $content = [
             'name' => $submission->villager->name,
             'for' => $submission->name,
@@ -82,20 +77,25 @@ class VerificationController extends Controller
                 $submission->save();
                 Mail::to($email)->send(new NotificationSubmission($content));
 
-                // Mail::send('app.notification.email', $data, function($mail) use($email){
-                //     $mail->to($email, 'no-reply')->subject('Notifikasi Pengajuan');
-                // });
             } else {
                 $submission->is_rt_approve = '1';
                 $submission->save();
+
+                $operator = Operator::where('position', 'Ketua RW')->first();
+                $messages = [
+                    'name' => $operator->villager->name,
+                    'applicant' => $submission->villager->name,
+                    'for' => $submission->name,
+                    'type' => $submission->type,
+                    'created_at' => $submission->created_at,
+                    'status' => $submission->status
+                ];
+                Mail::to($operator->villager->user->email)->send(new NotificationVerification($messages));
             }
         } else if($request->status == "Perlu di revisi"){
             $submission->status = "Perlu di revisi";
             $submission->save();
             Mail::to($email)->send(new NotificationSubmission($content));
-            // Mail::send('app.notification.email', $data, function($mail) use($email){
-            //     $mail->to($email, 'no-reply')->subject('Notifikasi Pengajuan');
-            // });
         } else {
             $submission->status = "Ditolak";
             $submission->save();

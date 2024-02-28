@@ -14,8 +14,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use SimpleSoftwareIO\QrCode\Generator;
 use App\Http\Requests\Submission\UpdateRequest;
 use App\Http\Requests\Submission\StoreRequest;
-use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificationVerification;
 use Carbon\Carbon;
+use Auth;
 
 class SubmissionController extends Controller
 {
@@ -45,6 +47,8 @@ class SubmissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        // $operator = Operator::where('region_rt', Auth::user()->villager->region_rt)->first();
+        // dd($operator->villager->user->email);
         $request->validated();
 
         $post = new Submission;
@@ -80,6 +84,18 @@ class SubmissionController extends Controller
         // Storage::disk('public')->put('signature/'. $fileName, $decoded_image);
 
         $post->save();
+
+        $operator = Operator::where('region_rt', Auth::user()->villager->region_rt)->first();
+        $messages = [
+            'name' => $operator->villager->name,
+            'applicant' => Auth::user()->villager->name,
+            'for' => $request->name,
+            'type' => $request->type,
+            'created_at' => $post->created_at,
+            'status' => $post->status
+        ];
+
+        Mail::to($operator->villager->user->email)->send(new NotificationVerification($messages));
 
         Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
         return redirect()->route('submission.index');

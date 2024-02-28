@@ -36,7 +36,7 @@
                     @elseif($submission->status == "Ditolak")
                         <span class="badge bg-danger"><i class="bx bx-x"></i> Ditolak</span>
                     @else
-                        <span class="badge bg-info"><i class="bx bx-mail-send"></i> Perlu di verifikasi</span>
+                        <span class="badge bg-info"><i class="bx bx-mail-send"></i> Proses verifikasi</span>
                     @endif
                 </x-splade-cell>
                 <x-splade-cell aksi as="$submission">
