@@ -105,7 +105,8 @@
                             <x-splade-textarea id="comment" name="description" label="Komentar" placeholder="Masukkan Komentar" required autosize />
                         </div>
                         <div class="col-12 mt-4">
-                            <x-splade-submit class="btn btn-primary mb-4" :label="__('Simpan')" />
+                            <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
+                            <Link href="{{ route('verification.index') }}" class="btn btn-danger mr-2 w-30 float-end" style="height: 42px">Batal</Link>
                         </div>
                     </x-splade-form>
                 </div>

@@ -55,7 +55,7 @@
                         <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
                         @if ($submission->status == "Disetujui")
                             <a href="{{ route('submission.download', $submission->hash) }}" target="_blank" class="btn btn-success mb-4">
-                                <i class="bx bx-download"></i> Cetak Surat
+                                <i class="bx bx-printer"></i> Cetak Surat
                             </a>
                         @endif
                         <x-splade-form :default="$submission">

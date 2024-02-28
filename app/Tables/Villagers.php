@@ -55,7 +55,7 @@ class Villagers extends AbstractTable
     {
         $table
             ->withGlobalSearch('Cari nama warga...', ['name'])
-            ->defaultSort('name')
+            ->defaultSort('region_rt', 'asc')
             ->column(key: 'name', searchable: true, sortable: true, canBeHidden: false, label: 'Nama')
             ->column(key: 'nik', searchable: true, sortable: true, label: 'NIK')
             ->column(key: 'region_rt', searchable: true, sortable: true, label: 'Wilayah RT')

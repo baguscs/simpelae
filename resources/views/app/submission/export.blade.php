@@ -54,6 +54,11 @@
             <td class="ps-2">{{ $submission->name }}</td>
         </tr>
         <tr>
+            <td>NIK</td>
+            <td class="ps-3">:</td>
+            <td class="ps-2">{{ $submission->nik }}</td>
+        </tr>
+        <tr>
             <td>Alamat</td>
             <td class="ps-3">:</td>
             <td class="ps-2">{{ $submission->address }}, {{ $submission->region_rt }}, RW : 02</td>
@@ -87,11 +92,6 @@
             <td>Kewarganegaraan</td>
             <td class="ps-3">:</td>
             <td class="ps-2">{{ $submission->nationaly }}</td>
-        </tr>
-        <tr>
-            <td>NIK</td>
-            <td class="ps-3">:</td>
-            <td class="ps-2">{{ $submission->nik }}</td>
         </tr>
         <tr>
             <td>Tujuan</td>
