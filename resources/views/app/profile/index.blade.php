@@ -56,46 +56,46 @@
                         <x-splade-form :default="$user" class="mb-3" action="{{ route('profile.updateEmail', $user->hash) }}" method="PUT">
                             @csrf
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="nik" type="number" name="villager.nik" :label="__('NIK')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="number_kk" type="number" name="villager.number_kk" :label="__('Nomor Kartu Keluarga')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="name" type="text" name="villager.name" :label="__('Nama Lengkap')" readonly />
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="place_of_birth" type="text" name="villager.place_of_birth" :label="__('Tempat Lahir')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="date_of_birth" type="text" name="villager.date_of_birth" :label="__('Tanggal Lahir')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="gender" type="text" name="villager.gender" :label="__('Jenis Kelamin')" readonly />
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="address" type="text" name="villager.address" :label="__('Alamat')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="religion" type="text" name="villager.religion" :label="__('Agama')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="job" type="text" name="villager.job" :label="__('Pekerjaan')" readonly />
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="phone_number" type="number" name="villager.phone_number" :label="__('Nomor Telepon')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="region_rt" type="text" name="villager.region_rt" :label="__('Wilayah RT')" readonly />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-md-4">
                                     <x-splade-input id="nationaly" type="text" name="villager.nationaly" :label="__('Kewarganegaraan')" readonly />
                                 </div>
                             </div>
