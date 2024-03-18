@@ -12,7 +12,7 @@ class Verification extends Model
     use HashableId;
 
     public const STATUS_APPROVE = "Disetujui";
-    public const STATUS_REVISION = "Perlu diperbaiki";
+    public const STATUS_REVISION = "Perlu di revisi";
     public const STATUS_REJECT = "Ditolak";
 
     protected $table = "verifications";

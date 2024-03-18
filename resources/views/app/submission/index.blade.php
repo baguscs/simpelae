@@ -52,7 +52,7 @@
 
 
                     <x-splade-modal name="detail-data{{ $submission->hash }}">
-                        <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
+                        <p class="fs-3 fw-bold mb-4">Detail Data Pengajuan</p>
                         @if ($submission->status == "Disetujui")
                             <a href="{{ route('submission.download', $submission->hash) }}" target="_blank" class="btn btn-success mb-4">
                                 <i class="bx bx-printer"></i> Cetak Surat
@@ -74,6 +74,17 @@
     @push('pageTitle')
         {{ $pageTitle }}
     @endpush
+
+    {{-- <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i> Sukses</h5>
+        {{Session::get("success") }}
+    </div> --}}
+    @if ($messege = Session::get("success"))
+        <script>
+            console.log('masuk');
+        </script>
+    @endif
 
 </x-app-layout>
 

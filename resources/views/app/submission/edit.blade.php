@@ -123,7 +123,7 @@
             <div class="card h-auto">
                 <div class="card-header d-flex align-items-center justify-content-between pb-0">
                     <div class="card-title mb-0">
-                        <p class="m-0 mb-4 me-2 fw-bold" style="font-size: 20px">Formulir Verifikasi</p>
+                        <p class="m-0 mb-4 me-2 fw-bold" style="font-size: 20px">Catatan Verifikasi</p>
                     </div>
                 </div>
                 <div class="card-body">

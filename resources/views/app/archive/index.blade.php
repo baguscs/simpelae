@@ -20,7 +20,7 @@
 
 
                     <x-splade-modal name="detail-data{{ $archives->hash }}">
-                        <p class="fs-3 fw-bold mb-4">Detail Data Warga</p>
+                        <p class="fs-3 fw-bold mb-4">Detail Data Pengajuan</p>
                         {{-- @if ($archives->status == "Disetujui")
                             <a href="{{ route('submission.download', $archives->hash) }}" target="_blank" class="btn btn-success mb-4">
                                 <i class="bx bx-download"></i> Download Surat

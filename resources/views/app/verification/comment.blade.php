@@ -97,7 +97,7 @@
                             <x-splade-select id="action" name="status" label="Pilih Aksi Verifikasi" required>
                                 <option value="" selected disabled>Pilih Aksi</option>
                                 <option value="Disetujui">Disetujui</option>
-                                <option value="Perlu Diperbaiki">Perlu Diperbaiki</option>
+                                <option value="Perlu di revisi">Perlu Diperbaiki</option>
                                 <option value="Ditolak">Ditolak</option>
                             </x-splade-select>
                         </div>

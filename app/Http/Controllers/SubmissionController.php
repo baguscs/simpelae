@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationVerification;
 use Carbon\Carbon;
 use Auth;
+use Alert;
 
 class SubmissionController extends Controller
 {
@@ -47,8 +48,6 @@ class SubmissionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // $operator = Operator::where('region_rt', Auth::user()->villager->region_rt)->first();
-        // dd($operator->villager->user->email);
         $request->validated();
 
         $post = new Submission;
@@ -97,8 +96,16 @@ class SubmissionController extends Controller
 
         Mail::to($operator->villager->user->email)->send(new NotificationVerification($messages));
 
-        Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
-        return redirect()->route('submission.index');
+        $destinationNumber = $operator->villager->phone_number;
+        $notificationMessage = "Pemberitahuan pengajuan atas nama ".Auth::user()->villager->name."  menunggu untuk diverifikasi. Mohon segera di tindak lanjuti, terima kasih";
+        $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
+
+        // Alert::success('Terkirim', 'Berhasil menambah data pengajuan')
+        //         ->footer('<Link href='. $sendNotifWA .' class="btn btn-success" target="_blank"><i class="bx bx-whatsapp"></i> Kirim pemberitahuan ke WA</Link>');
+
+        // Alert::success('Success Title', 'Success Message');
+        // Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
+        return redirect()->route('submission.index')->with('message', 'oke');
     }
 
     /**
