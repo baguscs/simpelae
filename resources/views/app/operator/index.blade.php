@@ -52,7 +52,7 @@
                             @csrf
                             <p class="text-center fs-5">Apakah anda yakin ingin menghapus data {{ $operators->villager->name }} ?</p>
                             <div class="mt-4">
-                                <x-splade-submit class="btn btn-danger  w-30 float-end" :label="__('Hapus')" />
+                                <x-splade-submit class="btn btn-danger  w-30 float-end" :label="__('Yakin hapus')" />
                                 <Link class="btn btn-secondary w-30 float-end mr-2" as="button" @click="modal.close">Batal</Link>
                             </div>
                         </x-splade-form>
