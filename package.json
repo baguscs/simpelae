@@ -18,8 +18,5 @@
         "vite": "^4.0.0",
         "vue": "^3.2.41"
     },
-    "dependencies": {
-        "signature_pad": "^4.1.7",
-        "sweetalert2": "^11.10.6"
-    }
+    "dependencies": {}
 }
