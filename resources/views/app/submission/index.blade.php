@@ -13,6 +13,12 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
+            @if ($messege = Session::get("success"))
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    {{ Session::get("success") }} <a class="btn btn-sm btn-success" href="{{ Session::get("announcement") }}" target="_blank"><i class="bx bxl-whatsapp"></i> Kirim Pemberitahuan WhatsApp</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <x-splade-table :for="$submission">
                 <x-splade-cell approve_rw as="$submission">
                     @if ($submission->is_rw_approve == 1)
@@ -74,17 +80,5 @@
     @push('pageTitle')
         {{ $pageTitle }}
     @endpush
-
-    {{-- <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h5><i class="icon fas fa-check"></i> Sukses</h5>
-        {{Session::get("success") }}
-    </div> --}}
-    @if ($messege = Session::get("success"))
-        <script>
-            console.log('masuk');
-        </script>
-    @endif
-
 </x-app-layout>
 

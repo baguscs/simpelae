@@ -56,7 +56,7 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-6">
-        <x-splade-input id="form-data" name="phone_number" type="number" label="Nomor HP" required />
+        <x-splade-input id="form-data" name="phone_number" type="text" label="Nomor HP" required />
     </div>
     <div class="col-md-6">
         <x-splade-input id="form-data" name="job" label="Pekerjaan" type="text" required />

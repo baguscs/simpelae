@@ -96,16 +96,13 @@ class SubmissionController extends Controller
 
         Mail::to($operator->villager->user->email)->send(new NotificationVerification($messages));
 
+        $operator = Operator::where('region_rt', Auth::user()->villager->region_rt)->first();
         $destinationNumber = $operator->villager->phone_number;
         $notificationMessage = "Pemberitahuan pengajuan atas nama ".Auth::user()->villager->name."  menunggu untuk diverifikasi. Mohon segera di tindak lanjuti, terima kasih";
         $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
 
-        // Alert::success('Terkirim', 'Berhasil menambah data pengajuan')
-        //         ->footer('<Link href='. $sendNotifWA .' class="btn btn-success" target="_blank"><i class="bx bx-whatsapp"></i> Kirim pemberitahuan ke WA</Link>');
-
-        // Alert::success('Success Title', 'Success Message');
         // Toast::title('Berhasil menambah data pengajuan')->autoDismiss(5);
-        return redirect()->route('submission.index')->with('message', 'oke');
+        return redirect()->route('submission.index')->with('success', 'Berhasil menambah data pengajuan')->with('announcement', $sendNotifWA);
     }
 
     /**
@@ -170,10 +167,7 @@ class SubmissionController extends Controller
 
     public function download($id_submission){
         $submission = Submission::byHashOrFail($id_submission);
-        // dd(route(''))
-        // $qrcode = new Generator;
-        // $qrcode->size(100)->generate(route('submission.check', $submission->hash));
-        // dd($qrcode);
+
         $qrcode = QrCode::size(100)->format('png')->generate(route('submission.check', $submission->hash));
         // $content = $qrcode->getContent();
 
