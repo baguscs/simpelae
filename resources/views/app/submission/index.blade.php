@@ -18,7 +18,7 @@
                 <div class="alert alert-primary alert-dismissible" role="alert">
                     {{ Session::get('success') }} <a class="btn btn-sm btn-success"
                         href="{{ Session::get('announcement') }}" target="_blank"><i class="bx bxl-whatsapp"></i> Kirim
-                        Pemberitahuan WhatsApp</a>
+                        Pemberitahuan WhatsApp ke Ketua RT</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
