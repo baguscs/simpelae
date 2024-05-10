@@ -55,13 +55,13 @@
                         </Link>
                     @endif
 
-                    <Link href="#detail-data{{ $submission->hash }}" class="btn btn-info" id="btn-detail"
+                    <Link href="{{ route('submission.show', $submission->hash) }}" class="btn btn-info" id="btn-detail"
                         style="margin-left: 10px">
                     <i class="bx bx-info-circle"></i> Detail
                     </Link>
 
 
-                    <x-splade-modal name="detail-data{{ $submission->hash }}">
+                    {{-- <x-splade-modal name="detail-data{{ $submission->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Pengajuan</p>
                         @if ($submission->status == 'Disetujui')
                             <a href="{{ route('submission.download', $submission->hash) }}" target="_blank"
@@ -72,7 +72,7 @@
                         <x-splade-form :default="$submission">
                             <x-submissions.detail :file="$submission->attachment"></x-submissions.detail>
                         </x-splade-form>
-                    </x-splade-modal>
+                    </x-splade-modal> --}}
 
                 </x-splade-cell>
                 <x-slot:empty-state>

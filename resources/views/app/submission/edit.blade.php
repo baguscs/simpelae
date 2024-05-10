@@ -5,7 +5,7 @@
                 <Link href="{{ route('dashboard') }}">Beranda</Link>
             </li>
             <li class="breadcrumb-item">
-                <Link href="{{ route('verification.index') }}">Lihat Pengajuan</Link>
+                <Link href="{{ route('submission.index') }}">Lihat Pengajuan</Link>
             </li>
             <li class="breadcrumb-item active" style="font-size: 15px">{{ $pageTitle }}</li>
         </ol>
@@ -37,7 +37,7 @@
                                     <x-splade-input type="text" name="place_of_birth" :label="__('Tempat Lahir')" required />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="date_of_birth" :label="__('Tanggal Lahir')" required />
+                                    <x-splade-input date name="date_of_birth" :label="__('Tanggal Lahir')" required />
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <x-splade-select id="form-data" name="gender" label="Jenis Kelamin" required>
@@ -61,10 +61,10 @@
                                     <x-splade-input type="text" name="address" :label="__('Alamat Lengkap')" required />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="nationaly" :label="__('Kewarganegaraan')" />
+                                    <x-splade-input type="text" name="nationaly" :label="__('Kewarganegaraan')" required />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="job" :label="__('Pekerjaan')" />
+                                    <x-splade-input type="text" name="job" :label="__('Pekerjaan')" required />
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <x-splade-select id="form-data" name="marital_status" label="Status Pernikahan"
