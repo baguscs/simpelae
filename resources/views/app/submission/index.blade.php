@@ -9,13 +9,16 @@
     </nav>
     <div class="mb-4 d-flex">
         <p style="font-size: 25px">Data Pengajuan</p>
-        <Link href="{{ route('submission.create') }}" class="btn btn-success ml-3"><i class="bx bx-user-plus"></i> Tambah Pengajuan</Link>
+        <Link href="{{ route('submission.create') }}" class="btn btn-success ml-3"><i class="bx bx-user-plus"></i> Tambah
+        Pengajuan</Link>
     </div>
     <div class="row">
         <div class="col-xl-12">
-            @if ($messege = Session::get("success"))
+            @if ($messege = Session::get('success'))
                 <div class="alert alert-primary alert-dismissible" role="alert">
-                    {{ Session::get("success") }} <a class="btn btn-sm btn-success" href="{{ Session::get("announcement") }}" target="_blank"><i class="bx bxl-whatsapp"></i> Kirim Pemberitahuan WhatsApp</a>
+                    {{ Session::get('success') }} <a class="btn btn-sm btn-success"
+                        href="{{ Session::get('announcement') }}" target="_blank"><i class="bx bxl-whatsapp"></i> Kirim
+                        Pemberitahuan WhatsApp</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -35,32 +38,34 @@
                     @endif
                 </x-splade-cell>
                 <x-splade-cell status as="$submission">
-                    @if ($submission->status == "Perlu di revisi")
+                    @if ($submission->status == 'Perlu di revisi')
                         <span class="badge bg-warning"><i class="bx bx-time"></i> Perlu di revisi</span>
-                    @elseif($submission->status == "Disetujui")
+                    @elseif($submission->status == 'Disetujui')
                         <span class="badge bg-success"><i class="bx bx-check"></i> Disetujui</span>
-                    @elseif($submission->status == "Ditolak")
+                    @elseif($submission->status == 'Ditolak')
                         <span class="badge bg-danger"><i class="bx bx-x"></i> Ditolak</span>
                     @else
                         <span class="badge bg-info"><i class="bx bx-mail-send"></i> Proses verifikasi</span>
                     @endif
                 </x-splade-cell>
                 <x-splade-cell aksi as="$submission">
-                    @if ($submission->status == "Perlu di revisi")
+                    @if ($submission->status == 'Perlu di revisi')
                         <Link href="{{ route('submission.edit', $submission->hash) }}" class="btn btn-primary btn-edit">
-                            <i class="bx bx-edit-alt"></i> Revisi
+                        <i class="bx bx-edit-alt"></i> Revisi
                         </Link>
                     @endif
 
-                    <Link href="#detail-data{{ $submission->hash }}" class="btn btn-info" id="btn-detail" style="margin-left: 10px">
-                        <i class="bx bx-info-circle"></i> Detail
+                    <Link href="#detail-data{{ $submission->hash }}" class="btn btn-info" id="btn-detail"
+                        style="margin-left: 10px">
+                    <i class="bx bx-info-circle"></i> Detail
                     </Link>
 
 
                     <x-splade-modal name="detail-data{{ $submission->hash }}">
                         <p class="fs-3 fw-bold mb-4">Detail Data Pengajuan</p>
-                        @if ($submission->status == "Disetujui")
-                            <a href="{{ route('submission.download', $submission->hash) }}" target="_blank" class="btn btn-success mb-4">
+                        @if ($submission->status == 'Disetujui')
+                            <a href="{{ route('submission.download', $submission->hash) }}" target="_blank"
+                                class="btn btn-success mb-4">
                                 <i class="bx bx-printer"></i> Cetak Surat
                             </a>
                         @endif
@@ -81,4 +86,3 @@
         {{ $pageTitle }}
     @endpush
 </x-app-layout>
-

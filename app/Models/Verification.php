@@ -46,7 +46,7 @@ class Verification extends Model
      */
     public function operator()
     {
-        return $this->belongsTo(operator::class, 'operator_id');
+        return $this->belongsTo(Operator::class, 'operator_id');
     }
 
 }
