@@ -18,7 +18,20 @@
             <div class="card">
                 <div class="row row-bordered g-0">
                     <div class="col-md-12">
-                        <p class="card-header m-0 me-2 pb-3 fw-bold" style="font-size: 20px">Berkas Pengajuan</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-header m-0 me-2 pb-3 fw-bold" style="font-size: 20px">Berkas Pengajuan
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                @if ($submission->status == 'Disetujui')
+                                    <a href="{{ route('submission.download', $submission->hash) }}" target="_blank"
+                                        class="btn btn-success mt-4 mr-5 float-end">
+                                        <i class="bx bx-printer"></i> Cetak Surat
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                         <x-splade-form :default="$submission" class="mb-3"
                             action="{{ route('submission.update', $submission->hash) }}" method="PUT">
                             @csrf
@@ -40,7 +53,7 @@
                                     <x-splade-input type="text" name="date_of_birth" :label="__('Tanggal Lahir')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-select id="form-data" name="gender" label="Jenis Kelamin" required>
+                                    <x-splade-select id="form-data" name="gender" label="Jenis Kelamin" disabled>
                                         <option value="" disabled>Pilih Jenis Kelamin</option>
                                         <option value="Laki-Laki">Laki-Laki</option>
                                         <option value="Perempuan">Perempuan</option>
@@ -107,6 +120,10 @@
                                                 alt="">
                                         @endif
                                     </x-splade-modal>
+                                </div>
+                                <div class="col-md-12">
+                                    <Link href="{{ route('submission.index') }}"
+                                        class="btn btn-danger mr-2 w-30 float-end" style="height: 42px">Kembali</Link>
                                 </div>
                             </div>
                         </x-splade-form>
