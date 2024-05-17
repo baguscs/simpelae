@@ -110,7 +110,12 @@ class SubmissionController extends Controller
      */
     public function show(Submission $submission)
     {
-        //
+        $veriication = Verification::query()->where('submission_id', $submission->id)->get();
+        return view('app.submission.detail', [
+            'pageTitle' => "Detail Pengajuan",
+            'verification' => $veriication,
+            'submission' => $submission
+        ]);
     }
 
     /**

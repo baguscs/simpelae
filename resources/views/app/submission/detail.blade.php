@@ -11,7 +11,7 @@
         </ol>
     </nav>
     <div class="mb-4 d-flex">
-        <p style="font-size: 25px">Revisi Pengajuan</p>
+        <p style="font-size: 25px">Detail Pengajuan</p>
     </div>
     <div class="row">
         <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
@@ -28,16 +28,16 @@
                                     <x-splade-input type="text" name="villager.name" :label="__('Pengaju')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="name" :label="__('Kepada')" required />
+                                    <x-splade-input type="text" name="name" :label="__('Kepada')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="nik" :label="__('NIK')" required />
+                                    <x-splade-input type="text" name="nik" :label="__('NIK')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="place_of_birth" :label="__('Tempat Lahir')" required />
+                                    <x-splade-input type="text" name="place_of_birth" :label="__('Tempat Lahir')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input date name="date_of_birth" :label="__('Tanggal Lahir')" required />
+                                    <x-splade-input type="text" name="date_of_birth" :label="__('Tanggal Lahir')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <x-splade-select id="form-data" name="gender" label="Jenis Kelamin" required>
@@ -47,7 +47,7 @@
                                     </x-splade-select>
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-select id="form-data" name="religion" label="Agama" required>
+                                    <x-splade-select id="form-data" name="religion" label="Agama" disabled>
                                         <option value="" disabled>Pilih Agama</option>
                                         <option value="Islam">Islam</option>
                                         <option value="Kristen">Kristen</option>
@@ -58,24 +58,24 @@
                                     </x-splade-select>
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="address" :label="__('Alamat Lengkap')" required />
+                                    <x-splade-input type="text" name="address" :label="__('Alamat Lengkap')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="nationaly" :label="__('Kewarganegaraan')" required />
+                                    <x-splade-input type="text" name="nationaly" :label="__('Kewarganegaraan')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-input type="text" name="job" :label="__('Pekerjaan')" required />
+                                    <x-splade-input type="text" name="job" :label="__('Pekerjaan')" readonly />
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <x-splade-select id="form-data" name="marital_status" label="Status Pernikahan"
-                                        required>
+                                        disabled>
                                         <option value="" disabled>Pilih Status Pernikahan</option>
                                         <option value="Kawin">Kawin</option>
                                         <option value="Tidak Kawin">Tidak Kawin</option>
                                     </x-splade-select>
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <x-splade-select id="form-data" name="type" label="Jenis Surat" required>
+                                    <x-splade-select id="form-data" name="type" label="Jenis Surat" disabled>
                                         <option value="" disabled>Pilih Jenis Tujuan</option>
                                         <option value="Akta Kelahiran">Akta Kelahiran</option>
                                         <option value="Akta Kematian">Akta Kematian</option>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <x-splade-textarea type="text" name="description" :label="__('Keperluan')" autosize
-                                        required />
+                                        readonly />
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label for="">Dokumen Pendukung Saat Ini</label>
@@ -107,19 +107,6 @@
                                                 alt="">
                                         @endif
                                     </x-splade-modal>
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <x-splade-file name="attachments" :show-filename="false"
-                                        label="Ubah Dokumen Pendukung" />
-                                </div>
-                                <div class="col-md-6 mt-3">
-                                    <label for="">Petinjau Dokumen Pendukung</label>
-                                    <img v-if="form.attachments" :src="form.$fileAsUrl('attachments')" />
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <x-splade-submit class="btn btn-primary  w-30 float-end" :label="__('Simpan')" />
-                                    <Link class="btn btn-danger w-30 float-end mr-2"
-                                        href="{{ route('submission.index') }}">Batal</Link>
                                 </div>
                             </div>
                         </x-splade-form>

@@ -77,6 +77,11 @@ class VerificationController extends Controller
                 $submission->save();
                 Mail::to($email)->send(new NotificationSubmission($content));
 
+                // $operator = Operator::where('region_rt', Auth::user()->villager->region_rt)->first();
+                $destinationNumber = $user->villager->phone_number;
+                $notificationMessage = "Pemberitahuan pengajuan anda telah disetujui. Silahkan cetak surat keterangan desa, terima kasih";
+                $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
+                $direction = "Warga";
             } else {
                 $submission->is_rt_approve = '1';
                 $submission->save();
@@ -91,20 +96,36 @@ class VerificationController extends Controller
                     'status' => $submission->status
                 ];
                 Mail::to($operator->villager->user->email)->send(new NotificationVerification($messages));
+
+                $operator = Operator::where('position', 'Ketua RW')->first();
+                $destinationNumber = $operator->villager->phone_number;
+                $notificationMessage = "Pemberitahuan pengajuan warga ".Auth::user()->villager->region_rt."  menunggu untuk diverifikasi. Mohon segera di tindak lanjuti, terima kasih";
+                $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
+                $direction = "Ketua RW";
             }
         } else if($request->status == "Perlu di revisi"){
             $submission->status = "Perlu di revisi";
             $submission->save();
             Mail::to($email)->send(new NotificationSubmission($content));
+
+            $destinationNumber = $user->villager->phone_number;
+            $notificationMessage = "Pemberitahuan pengajuan anda pelu diperbaiki. Segera perbaiki pengajuan anda agar segera diproses, terima kasih";
+            $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
+            $direction = "Warga";
         } else {
             $submission->status = "Ditolak";
             $submission->save();
             Mail::to($email)->send(new NotificationSubmission($content));
+
+            $destinationNumber = $user->villager->phone_number;
+            $notificationMessage = "Pemberitahuan pengajuan anda ditolak. Mohon maaf pengajuan anda tidak dapat ditindak lanjuti, terima kasih";
+            $sendNotifWA = "https://wa.me/+62". $destinationNumber ."?text=". urlencode($notificationMessage);
+            $direction = "Warga";
         }
 
-        Toast::title('Berhasil memverifikasi pengajuan')->autoDismiss(5);
+        // Toast::title('Berhasil memverifikasi pengajuan')->autoDismiss(5);
 
-        return redirect()->route('verification.index');
+        return redirect()->route('verification.index')->with('success', 'Berhasil memverifikasi data pengajuan')->with('announcement', $sendNotifWA)->with('direction', $direction);
     }
 
     /**
